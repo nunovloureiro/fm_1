@@ -33,7 +33,7 @@
         </style>
     </head>
     <body>
-        <script src="sketch.js"></script>
+       
         
         <button id="start"> Start </button>
         <div id="loading"> Loading ... </div>
@@ -41,6 +41,7 @@
         
 
         <script src="webpd-runtime.js"></script>
+        
         
         <script>
             // SUMMARY
@@ -202,7 +203,11 @@
                 }
                                 
             }
-
+            initApp().then(() => {
+             console.log("✅ WebPd is now ready!");
+            });
         </script>
+
+    <script src="sketch.js"></script>
     </body>
 </html>
