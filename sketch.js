@@ -7,7 +7,7 @@ let rz = 0;
 
 function setup() {
     createMetaTag();
-    motionRequest();
+    //motionRequest();
     createCanvas(window.innerWidth, window.innerHeight);
     angleMode(RADIANS);
     rectMode(CENTER);
@@ -81,7 +81,7 @@ function draw() {
         text('click to start audio', width / 2, height / 2);
     }
 
-        // Dispatch the event with the latest values of rx, ry, rz
+        // // Dispatch the event with the latest values of rx, ry, rz
         const motionDataEvent = new CustomEvent('motionData', {
             detail: {
                 rx: rx,
