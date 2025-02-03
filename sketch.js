@@ -8,39 +8,40 @@ let ry = 0;
 let rz = 0;
 
 function setup() {
+    background(100);
     createMetaTag();
     //motionRequest();
     createCanvas(window.innerWidth, window.innerHeight);
     angleMode(RADIANS);
     rectMode(CENTER);
 
-     // Request permission for device orientation on iOS
-  //    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-  //       DeviceOrientationEvent.requestPermission()
-  //           .then(permissionState => {
-     //            if (permissionState === 'granted') {
-        //             window.addEventListener('deviceorientation', handleOrientation);
-           //      }
-             //})
-  //           .catch(console.error);
+    //  // Request permission for device orientation on iOS
+    //  if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+    //     DeviceOrientationEvent.requestPermission()
+    //         .then(permissionState => {
+    //             if (permissionState === 'granted') {
+    //                 window.addEventListener('deviceorientation', handleOrientation);
+    //             }
+    //         })
+    //         .catch(console.error);
     // } else {
-      //   // Handle regular non-iOS devices
-        // window.addEventListener('deviceorientation', handleOrientation);
-   //  }
+    //     // Handle regular non-iOS devices
+    //     window.addEventListener('deviceorientation', handleOrientation);
+    // }
 }
 
-// function handleOrientation(event) {
-//     i_rx = map(event.beta, 0, 90, 0, 1, false);
-//     rx = parseFloat(i_rx).toPrecision(2);
+function handleOrientation(event) {
+    i_rx = map(event.beta, 0, 90, 0, 1, false);
+    rx = parseFloat(i_rx).toPrecision(2);
 
-//     i_ry = map(event.gamma, 0, 90, 0, 1, false);
-//     ry = parseFloat(i_ry).toPrecision(2);
+    i_ry = map(event.gamma, 0, 90, 0, 1, false);
+    ry = parseFloat(i_ry).toPrecision(2);
 
-//     i_rz = map(event.alpha, 0, 360, 0, 1, true);
-//     rz = parseFloat(i_rz).toPrecision(2);
+    i_rz = map(event.alpha, 0, 360, 0, 1, true);
+    rz = parseFloat(i_rz).toPrecision(2);
 
-//     rotationValueLimiter();
-// }
+    rotationValueLimiter();
+}
     
 
 
@@ -57,7 +58,7 @@ function draw() {
   
     rotationValueLimiter();
   
-    background(0);
+    background(0,0,0);
     noStroke();
     
     fill(255, 0, 0);
