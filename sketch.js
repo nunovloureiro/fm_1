@@ -1,4 +1,6 @@
 let bg = 0;
+let start = 0;
+
 
 let i_rx = 0;
 let rx = 0;
@@ -27,33 +29,33 @@ function setup() {
     }
 }
 
-function handleOrientation(event) {
-    i_rx = map(event.beta, 0, 90, 0, 1, false);
-    rx = parseFloat(i_rx).toPrecision(2);
+// function handleOrientation(event) {
+//     i_rx = map(event.beta, 0, 90, 0, 1, false);
+//     rx = parseFloat(i_rx).toPrecision(2);
 
-    i_ry = map(event.gamma, 0, 90, 0, 1, false);
-    ry = parseFloat(i_ry).toPrecision(2);
+//     i_ry = map(event.gamma, 0, 90, 0, 1, false);
+//     ry = parseFloat(i_ry).toPrecision(2);
 
-    i_rz = map(event.alpha, 0, 360, 0, 1, true);
-    rz = parseFloat(i_rz).toPrecision(2);
+//     i_rz = map(event.alpha, 0, 360, 0, 1, true);
+//     rz = parseFloat(i_rz).toPrecision(2);
 
-    rotationValueLimiter();
-}
+//     rotationValueLimiter();
+// }
     
 
 
 function draw() {
 
-    // i_rx = map(rotationX, 0, HALF_PI, 0, 1, false);
-    // rx = parseFloat(i_rx).toPrecision(2);
+    i_rx = map(rotationX, 0, HALF_PI, 0, 1, false);
+    rx = parseFloat(i_rx).toPrecision(2);
     
-    // i_ry = map(rotationY, 0, HALF_PI, 0, 1, false);
-    // ry = parseFloat(i_ry).toPrecision(2);
+    i_ry = map(rotationY, 0, HALF_PI, 0, 1, false);
+    ry = parseFloat(i_ry).toPrecision(2);
     
-    // i_rz = map(rotationZ, 0, HALF_PI, 0, 1, true);
-    // rz = parseFloat(i_rz).toPrecision(2);
+    i_rz = map(rotationZ, 0, HALF_PI, 0, 1, true);
+    rz = parseFloat(i_rz).toPrecision(2);
   
-    // rotationValueLimiter();
+    rotationValueLimiter();
   
     background(0);
     noStroke();
@@ -71,11 +73,11 @@ function draw() {
     text('rx: ' + rx, 20, 40);
     text('ry: ' + ry, 20, 60);
     text('rz: ' + rz, 20, 80); 
-    text('mX: ' + mouseX, 20, 80); 
+    text('mX: ' + mouseX, 20, 100); 
 
 
     
-    if (getAudioContext().state !== 'running') {
+    if (start = 0) {
         textAlign(CENTER);
         fill(255, 255, 0);
         text('click to start audio', width / 2, height / 2);
@@ -92,7 +94,11 @@ function draw() {
         window.dispatchEvent(motionDataEvent);
 }
 
-
+function mousePressed(){
+    if (start == 0){
+        start = 1;
+    }
+}
 
 
 function rotationValueLimiter() {
