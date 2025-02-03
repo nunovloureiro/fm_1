@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
         <title>WebPd boilerplate</title>
         <style>
             #start {
@@ -27,7 +28,10 @@
         </style>
     </head>
     <body>
-        <h1>FM BASICV _ 01</h1>
+
+        <script src="sketch.js"></script>
+        
+        <h1>My Web Page</h1>
         <div>For more info about usage (how to interact with the patch), you can open this HTML file in a code editor.</div>
         <button id="start"> Start </button>
         <div id="loading"> Loading ... </div>
@@ -36,7 +40,7 @@
             // SUMMARY
             // 1. WEB PAGE INITIALIZATION
             // 2. SENDING MESSAGES FROM JAVASCRIPT TO THE PATCH
-            // 3. SENDING MESSAGES FROM THE PATCH TO JAVASCRIPT (coming soon ...)
+            // 3. SENDING MESSAGES FROM THE PATCH TO JAVASCRIPT
 
 
             // ------------- 1. WEB PAGE INITIALIZATION
@@ -53,11 +57,11 @@
                 await WebPdRuntime.initialize(audioContext)
 
                 // Fetch the patch code
-                response = await fetch('fm_basic.js')
+                response = await fetch('patch.js')
                 patch = await response.text()
 
                 // Comment this if you don't need audio input
-               // stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+                stream = await navigator.mediaDevices.getUserMedia({ audio: true })
 
                 // Hide loading and show start button
                 loadingDiv.style.display = 'none'
@@ -76,7 +80,11 @@
                 webpdNode = await WebPdRuntime.run(
                     audioContext, 
                     patch, 
-                    WebPdRuntime.defaultSettingsForRun('./patch.js'),
+                    WebPdRuntime.defaultSettingsForRun(
+                        './patch.js',
+                        // Comment this if you don't need to receive messages from the patch
+                        receiveMsgFromWebPd,
+                    ),
                 )
                 webpdNode.connect(audioContext.destination)
 
@@ -126,360 +134,245 @@
             
             // Here is an index of objects IDs to which you can send messages, with hints so you can find the right ID.
             // Note that by default only GUI objects (bangs, sliders, etc ...) are available.
-            //  - nodeId "n_1_13" portletId "0"
+            //  - nodeId "n_0_0" portletId "0"
             //      * type "hsl"
-            //      * position [136,130]
-            //      * label "swing"
+            //      * position 54 204
             
-            //  - nodeId "n_1_17" portletId "0"
-            //      * type "floatatom"
-            //      * position [126,113]
-            //      * label "bpm"
-            
-            //  - nodeId "n_1_20" portletId "0"
-            //      * type "bng"
-            //      * position [174,112]
-            
-            //  - nodeId "n_1_24" portletId "0"
-            //      * type "bng"
-            //      * position [200,112]
-            
-            //  - nodeId "n_0_2" portletId "0"
-            //      * type "bng"
-            //      * position [-79,-34]
-            //      * label "reset"
-            
-            //  - nodeId "n_2_3" portletId "0"
-            //      * type "nbx"
-            //      * position [103,130]
-            //      * label "a"
-            
-            //  - nodeId "n_2_7" portletId "0"
-            //      * type "nbx"
-            //      * position [142,130]
-            //      * label "b"
-            
-            //  - nodeId "n_2_9" portletId "0"
-            //      * type "nbx"
-            //      * position [181,130]
-            //      * label "c"
-            
-            //  - nodeId "n_2_15" portletId "0"
-            //      * type "nbx"
-            //      * position [104,183]
-            //      * label "st"
-            
-            //  - nodeId "n_2_16" portletId "0"
-            //      * type "nbx"
-            //      * position [144,183]
-            //      * label "rg"
-            
-            //  - nodeId "n_2_21" portletId "0"
-            //      * type "hsl"
-            //      * position [106,160]
-            //      * label "thr"
-            
-            //  - nodeId "n_5_3" portletId "0"
-            //      * type "nbx"
-            //      * position [103,130]
-            //      * label "a"
-            
-            //  - nodeId "n_5_7" portletId "0"
-            //      * type "nbx"
-            //      * position [142,130]
-            //      * label "b"
-            
-            //  - nodeId "n_5_9" portletId "0"
-            //      * type "nbx"
-            //      * position [181,130]
-            //      * label "c"
-            
-            //  - nodeId "n_5_15" portletId "0"
-            //      * type "nbx"
-            //      * position [104,183]
-            //      * label "st"
-            
-            //  - nodeId "n_5_16" portletId "0"
-            //      * type "nbx"
-            //      * position [144,183]
-            //      * label "rg"
-            
-            //  - nodeId "n_5_21" portletId "0"
-            //      * type "hsl"
-            //      * position [106,160]
-            //      * label "thr"
-            
-            //  - nodeId "n_8_3" portletId "0"
-            //      * type "nbx"
-            //      * position [103,130]
-            //      * label "a"
-            
-            //  - nodeId "n_8_7" portletId "0"
-            //      * type "nbx"
-            //      * position [142,130]
-            //      * label "b"
-            
-            //  - nodeId "n_8_9" portletId "0"
-            //      * type "nbx"
-            //      * position [181,130]
-            //      * label "c"
-            
-            //  - nodeId "n_8_15" portletId "0"
-            //      * type "nbx"
-            //      * position [104,183]
-            //      * label "st"
-            
-            //  - nodeId "n_8_16" portletId "0"
-            //      * type "nbx"
-            //      * position [144,183]
-            //      * label "rg"
-            
-            //  - nodeId "n_8_21" portletId "0"
-            //      * type "hsl"
-            //      * position [106,160]
-            //      * label "thr"
-            
-            //  - nodeId "n_11_10" portletId "0"
-            //      * type "hsl"
-            //      * position [110,115]
-            //      * label "attack"
-            
-            //  - nodeId "n_11_12" portletId "0"
-            //      * type "hsl"
-            //      * position [110,127]
-            //      * label "decay"
-            
-            //  - nodeId "n_11_16" portletId "0"
-            //      * type "hsl"
-            //      * position [110,139]
-            //      * label "fm"
-            
-            //  - nodeId "n_12_9" portletId "0"
-            //      * type "hsl"
-            //      * position [110,115]
-            //      * label "attack"
-            
-            //  - nodeId "n_12_11" portletId "0"
-            //      * type "hsl"
-            //      * position [110,127]
-            //      * label "decay"
-            
-            //  - nodeId "n_12_17" portletId "0"
-            //      * type "hsl"
-            //      * position [110,139]
-            //      * label "fm"
-            
-            //  - nodeId "n_13_9" portletId "0"
-            //      * type "hsl"
-            //      * position [110,115]
-            //      * label "attack"
-            
-            //  - nodeId "n_13_11" portletId "0"
-            //      * type "hsl"
-            //      * position [110,127]
-            //      * label "decay"
-            
-            //  - nodeId "n_13_17" portletId "0"
-            //      * type "hsl"
-            //      * position [110,139]
-            //      * label "fm"
-            
-            //  - nodeId "n_14_3" portletId "0"
-            //      * type "tgl"
-            //      * position [107,133]
-            
-            //  - nodeId "n_14_4" portletId "0"
-            //      * type "tgl"
-            //      * position [128,133]
-            
-            //  - nodeId "n_14_5" portletId "0"
-            //      * type "tgl"
-            //      * position [149,133]
-            
-            //  - nodeId "n_14_6" portletId "0"
-            //      * type "tgl"
-            //      * position [170,133]
-            
-            //  - nodeId "n_14_7" portletId "0"
-            //      * type "tgl"
-            //      * position [191,133]
-            
-            //  - nodeId "n_14_8" portletId "0"
-            //      * type "tgl"
-            //      * position [212,133]
-            
-            //  - nodeId "n_14_9" portletId "0"
-            //      * type "tgl"
-            //      * position [233,133]
-            
-            //  - nodeId "n_14_10" portletId "0"
-            //      * type "tgl"
-            //      * position [117,114]
-            
-            //  - nodeId "n_14_11" portletId "0"
-            //      * type "tgl"
-            //      * position [139,114]
-            
-            //  - nodeId "n_14_12" portletId "0"
-            //      * type "tgl"
-            //      * position [179,114]
-            
-            //  - nodeId "n_14_13" portletId "0"
-            //      * type "tgl"
-            //      * position [201,114]
-            
-            //  - nodeId "n_14_14" portletId "0"
-            //      * type "tgl"
-            //      * position [223,114]
-            
-            //  - nodeId "n_18_4" portletId "0"
+            //  - nodeId "n_0_1" portletId "0"
             //      * type "hradio"
-            //      * position [29,15]
-            //      * label "1/16"
+            //      * position 51 241
             
-            //  - nodeId "n_18_12" portletId "0"
-            //      * type "hsl"
-            //      * position [28,34]
-            //      * label "fb"
+            //  - nodeId "n_1_1" portletId "0"
+            //      * type "nbx"
+            //      * position 199 118
+            //      * label "interval"
             
-            //  - nodeId "n_18_18" portletId "0"
-            //      * type "hsl"
-            //      * position [28,46]
-            //      * label "frq"
+            //  - nodeId "n_1_4" portletId "0"
+            //      * type "tgl"
+            //      * position 116 117
+            //      * label "On/Off"
             
-            //  - nodeId "n_18_23" portletId "0"
-            //      * type "hsl"
-            //      * position [28,58]
-            //      * label "dis"
+            //  - nodeId "n_0_4" portletId "0"
+            //      * type "tgl"
+            //      * position 51 288
+            //      * label "First"
             
-            //  - nodeId "n_19_4" portletId "0"
-            //      * type "hradio"
-            //      * position [29,15]
-            //      * label "1/16"
+            //  - nodeId "n_0_6" portletId "0"
+            //      * type "nbx"
+            //      * position 92 288
             
-            //  - nodeId "n_19_12" portletId "0"
-            //      * type "hsl"
-            //      * position [28,34]
-            //      * label "fb"
-            
-            //  - nodeId "n_19_18" portletId "0"
-            //      * type "hsl"
-            //      * position [28,46]
-            //      * label "frq"
-            
-            //  - nodeId "n_19_23" portletId "0"
-            //      * type "hsl"
-            //      * position [28,58]
-            //      * label "dis"
-            
-            //  - nodeId "n_20_4" portletId "0"
+            //  - nodeId "n_0_7" portletId "0"
             //      * type "floatatom"
-            //      * position [106,114]
+            //      * position 299 211
             
-            //  - nodeId "n_20_10" portletId "0"
+            //  - nodeId "n_0_8" portletId "0"
             //      * type "floatatom"
-            //      * position [132,114]
+            //      * position 347 211
             
-            //  - nodeId "n_20_16" portletId "0"
+            //  - nodeId "n_0_9" portletId "0"
             //      * type "floatatom"
-            //      * position [158,114]
+            //      * position 395 211
             
-            //  - nodeId "n_21_4" portletId "0"
+            //  - nodeId "n_0_10" portletId "0"
             //      * type "floatatom"
-            //      * position [106,114]
+            //      * position 299 241
             
-            //  - nodeId "n_21_10" portletId "0"
+            //  - nodeId "n_0_11" portletId "0"
             //      * type "floatatom"
-            //      * position [132,114]
+            //      * position 347 241
             
-            //  - nodeId "n_21_16" portletId "0"
+            //  - nodeId "n_0_12" portletId "0"
             //      * type "floatatom"
-            //      * position [158,114]
+            //      * position 395 241
             
-            //  - nodeId "n_22_4" portletId "0"
+            //  - nodeId "n_0_13" portletId "0"
             //      * type "floatatom"
-            //      * position [106,114]
+            //      * position 299 271
             
-            //  - nodeId "n_22_10" portletId "0"
+            //  - nodeId "n_0_14" portletId "0"
             //      * type "floatatom"
-            //      * position [132,114]
+            //      * position 347 271
             
-            //  - nodeId "n_22_16" portletId "0"
+            //  - nodeId "n_0_15" portletId "0"
             //      * type "floatatom"
-            //      * position [158,114]
+            //      * position 395 271
             
-            //  - nodeId "n_23_3" portletId "0"
+            //  - nodeId "n_0_16" portletId "0"
+            //      * type "vsl"
+            //      * position 266 212
+            
+            //  - nodeId "n_0_17" portletId "0"
             //      * type "floatatom"
-            //      * position [103,113]
+            //      * position 299 301
             
-            //  - nodeId "n_23_8" portletId "0"
+            //  - nodeId "n_0_18" portletId "0"
             //      * type "floatatom"
-            //      * position [136,113]
+            //      * position 347 301
             
-            //  - nodeId "n_23_13" portletId "0"
+            //  - nodeId "n_0_19" portletId "0"
             //      * type "floatatom"
-            //      * position [169,113]
+            //      * position 395 301
             
-            //  - nodeId "n_23_30" portletId "0"
-            //      * type "hsl"
-            //      * position [106,130]
+            //  - nodeId "n_0_28" portletId "0"
+            //      * type "nbx"
+            //      * position 137 288
             
-            //  - nodeId "n_23_31" portletId "0"
-            //      * type "hsl"
-            //      * position [139,130]
-            
-            //  - nodeId "n_23_32" portletId "0"
-            //      * type "hsl"
-            //      * position [172,130]
-            
-            //  - nodeId "n_23_36" portletId "0"
-            //      * type "floatatom"
-            //      * position [202,113]
-            
-            //  - nodeId "n_23_40" portletId "0"
-            //      * type "hsl"
-            //      * position [205,130]
-            
-            //  - nodeId "n_23_44" portletId "0"
-            //      * type "floatatom"
-            //      * position [235,113]
-            
-            //  - nodeId "n_23_48" portletId "0"
-            //      * type "hsl"
-            //      * position [238,130]
-            
-            //  - nodeId "n_23_52" portletId "0"
-            //      * type "floatatom"
-            //      * position [268,113]
-            
-            //  - nodeId "n_23_56" portletId "0"
-            //      * type "hsl"
-            //      * position [271,130]
-            
-            //  - nodeId "n_30_4" portletId "0"
-            //      * type "hsl"
-            //      * position [153,117]
-            //      * label "spd"
-            
-            //  - nodeId "n_30_7" portletId "0"
-            //      * type "hsl"
-            //      * position [125,129]
-            //      * label "fb"
-            
-            //  - nodeId "n_30_8" portletId "0"
-            //      * type "hsl"
-            //      * position [125,139]
-            //      * label "dl"
-            
-            //  - nodeId "n_30_13" portletId "0"
-            //      * type "hsl"
-            //      * position [125,149]
-            //      * label "fd"
-            
-
 
             // ------------- 3. SENDING MESSAGES FROM THE PATCH TO JAVASCRIPT
-            // Coming soon ... 
+            // Use the function receiveMsgFromWebPd to receive a message from an object inside your patch.
+            // 
+            // Parameters : 
+            // - nodeId: the ID of the object that is sending a message. 
+            //          This ID is a string that has been assigned by WebPd at compilation.
+            //          You can find below the list of available IDs with hints to help you 
+            //          identify the object you want to interact with.
+            // - portletId : the ID of the object portlet that is sending the message.
+            // - message : the message that was sent. It is a list of strings and / or numbers.
+            const receiveMsgFromWebPd = (nodeId, portletId, message) => {
+                if (nodeId === "n_0_0" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_0" portletId "0"\n'
+                        + '	* type "hsl"\n'
+                        + '	* position 54 204\n'
+                    )
+                }
+                if (nodeId === "n_0_1" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_1" portletId "0"\n'
+                        + '	* type "hradio"\n'
+                        + '	* position 51 241\n'
+                    )
+                }
+                if (nodeId === "n_1_1" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_1_1" portletId "0"\n'
+                        + '	* type "nbx"\n'
+                        + '	* position 199 118\n'
+                        + '	* label "interval"'
+                    )
+                }
+                if (nodeId === "n_1_4" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_1_4" portletId "0"\n'
+                        + '	* type "tgl"\n'
+                        + '	* position 116 117\n'
+                        + '	* label "On/Off"'
+                    )
+                }
+                if (nodeId === "n_0_4" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_4" portletId "0"\n'
+                        + '	* type "tgl"\n'
+                        + '	* position 51 288\n'
+                        + '	* label "First"'
+                    )
+                }
+                if (nodeId === "n_0_6" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_6" portletId "0"\n'
+                        + '	* type "nbx"\n'
+                        + '	* position 92 288\n'
+                    )
+                }
+                if (nodeId === "n_0_7" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_7" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 299 211\n'
+                    )
+                }
+                if (nodeId === "n_0_8" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_8" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 347 211\n'
+                    )
+                }
+                if (nodeId === "n_0_9" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_9" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 395 211\n'
+                    )
+                }
+                if (nodeId === "n_0_10" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_10" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 299 241\n'
+                    )
+                }
+                if (nodeId === "n_0_11" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_11" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 347 241\n'
+                    )
+                }
+                if (nodeId === "n_0_12" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_12" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 395 241\n'
+                    )
+                }
+                if (nodeId === "n_0_13" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_13" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 299 271\n'
+                    )
+                }
+                if (nodeId === "n_0_14" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_14" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 347 271\n'
+                    )
+                }
+                if (nodeId === "n_0_15" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_15" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 395 271\n'
+                    )
+                }
+                if (nodeId === "n_0_16" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_16" portletId "0"\n'
+                        + '	* type "vsl"\n'
+                        + '	* position 266 212\n'
+                    )
+                }
+                if (nodeId === "n_0_17" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_17" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 299 301\n'
+                    )
+                }
+                if (nodeId === "n_0_18" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_18" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 347 301\n'
+                    )
+                }
+                if (nodeId === "n_0_19" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_19" portletId "0"\n'
+                        + '	* type "floatatom"\n'
+                        + '	* position 395 301\n'
+                    )
+                }
+                if (nodeId === "n_0_28" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_28" portletId "0"\n'
+                        + '	* type "nbx"\n'
+                        + '	* position 137 288\n'
+                    )
+                }                
+            }
 
         </script>
     </body>
