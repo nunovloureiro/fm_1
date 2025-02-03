@@ -11,21 +11,49 @@ function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     angleMode(RADIANS);
     rectMode(CENTER);
-    
+
+     // Request permission for device orientation on iOS
+     if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission()
+            .then(permissionState => {
+                if (permissionState === 'granted') {
+                    window.addEventListener('deviceorientation', handleOrientation);
+                }
+            })
+            .catch(console.error);
+    } else {
+        // Handle regular non-iOS devices
+        window.addEventListener('deviceorientation', handleOrientation);
+    }
 }
+
+function handleOrientation(event) {
+    i_rx = map(event.beta, 0, 90, 0, 1, false);
+    rx = parseFloat(i_rx).toPrecision(2);
+
+    i_ry = map(event.gamma, 0, 90, 0, 1, false);
+    ry = parseFloat(i_ry).toPrecision(2);
+
+    i_rz = map(event.alpha, 0, 360, 0, 1, true);
+    rz = parseFloat(i_rz).toPrecision(2);
+
+    rotationValueLimiter();
+}
+    
+
 
 function draw() {
 
-    i_rx = map(rotationX, 0, HALF_PI, 0, 1, false);
-    rx = parseFloat(i_rx).toPrecision(2);
+    // i_rx = map(rotationX, 0, HALF_PI, 0, 1, false);
+    // rx = parseFloat(i_rx).toPrecision(2);
     
-    i_ry = map(rotationY, 0, HALF_PI, 0, 1, false);
-    ry = parseFloat(i_ry).toPrecision(2);
+    // i_ry = map(rotationY, 0, HALF_PI, 0, 1, false);
+    // ry = parseFloat(i_ry).toPrecision(2);
     
-    i_rz = map(rotationZ, 0, HALF_PI, 0, 1, true);
-    rz = parseFloat(i_rz).toPrecision(2);
+    // i_rz = map(rotationZ, 0, HALF_PI, 0, 1, true);
+    // rz = parseFloat(i_rz).toPrecision(2);
   
-    rotationValueLimiter();
+    // rotationValueLimiter();
   
     background(0);
     noStroke();
@@ -80,15 +108,4 @@ function createMetaTag() {
     meta.parent(head);
 }
 
-function motionRequest() {
-    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission()
-            .then(permissionState => {
-                if (permissionState === 'granted') {
-                    console.log("Device motion access granted");
-                }
-            })
-            .catch(console.error);
-    }
-}
 
