@@ -71,6 +71,8 @@ function draw() {
     text('rx: ' + rx, 20, 40);
     text('ry: ' + ry, 20, 60);
     text('rz: ' + rz, 20, 80); 
+    text('mX: ' + mouseX, 20, 80); 
+
 
     
     if (getAudioContext().state !== 'running') {
