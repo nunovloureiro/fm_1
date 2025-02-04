@@ -1,21 +1,39 @@
 let mx;
 let go = 0;
 
+let i_rx = 0;
+let rx = 0;
+
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
+    
+    angleMode(RADIANS);
+    rectMode(CENTER);
+
     checkAppStart();
 }
 
 function draw() {
+
+    i_rx = map(rotationX, 0, HALF_PI, 0, 1, false);
+    rx = parseFloat(i_rx).toPrecision(2);
+
+    rotationValueLimiter();
+
     background(255);
-    mx = map(mouseX, 0, window.innerWidth, 0, 1);
+
+    fill(255, 0, 0);
+    rect(window.innerWidth / 4, window.innerHeight / 2, 5, 0 + rx * 100);
+
+    //mx = map(mouseX, 0, window.innerWidth, 0, 1);
     fill(0,0,255);
+    textAlign(LEFT);
     textSize(30);
-    text('mx= ' + mx, 60, 80);
+    text('rx= ' + rx, 20, 60);
 
     if (go == 1){
-        console.log("Sending value:", mx);
-        sendMsgToWebPd("n_0_8", "0", [mx]);
+       // console.log("Sending value:", mx);
+        sendMsgToWebPd("n_0_8", "0", [rx]);
     }
 }
 
@@ -27,4 +45,11 @@ function checkAppStart() {
         } else {
         setTimeout(checkAppStart, 100); // Check again in 100ms
     }
+}
+
+
+function rotationValueLimiter() {
+    rx = max(rx, 0);
+    // ry = max(ry, 0);
+    // rz = max(rz, 0);
 }
