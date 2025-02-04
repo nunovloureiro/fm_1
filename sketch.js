@@ -27,10 +27,10 @@ function draw() {
     i_ry = map(rotationY, 0, HALF_PI, 0, 4, true);
     ry = parseFloat(i_ry).toPrecision(2);
 
-    i_rz = map(rotationZ, -HALF_PI, HALF_PI, 0, 4, true);
+    i_rz = map(rotationZ, 0, HALF_PI, 0, 4, true);
     rz = parseFloat(i_rz).toPrecision(2);
 
-    // rotationValueLimiter();
+    rotationValueLimiter();
 
     background(0);
 
@@ -49,7 +49,7 @@ function draw() {
     fill(0,0,255);
     textAlign(LEFT);
     textSize(20);
-    text('220Hz sine.freq.vol 1 ++', 20, 40);
+    text('220Hz sine.freq.vol ++', 20, 40);
     text('rx= ' + rx, 20, 80);
     text('ry= ' + ry, 20, 100);
     text('rz= ' + rz, 20, 120);
@@ -75,8 +75,8 @@ function checkAppStart() {
 }
 
 
-// function rotationValueLimiter() {
-//     rx = max(rx, 0);
-//     ry = max(ry, 0);
-    //rz = max(rz, 0);
-// }
+function rotationValueLimiter() {
+    rx = max(rx, 0);
+    ry = max(ry, 0);
+    rz = max(rz, 0);
+}
