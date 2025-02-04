@@ -18,10 +18,10 @@ function setup() {
 function draw() {
 
     i_rx = map(rotationX, 0, HALF_PI, 0, 1, true);
-    rx = parseFloat(i_rx).toPrecision(2);
+    //rx = parseFloat(i_rx).toPrecision(2);
 
     i_ry = map(rotationY, 0, HALF_PI, 0, 4, true);
-    ry = parseFloat(i_ry).toPrecision(2);
+    //ry = parseFloat(i_ry).toPrecision(2);
 
     rotationValueLimiter();
 
