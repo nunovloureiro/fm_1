@@ -1,4 +1,5 @@
 let mx;
+let my;
 let go = 0;
 
 let i_rx = 0;
@@ -33,8 +34,8 @@ function draw() {
     fill(255, 0, 0);
     rect(window.innerWidth / 2, window.innerHeight / 2, 5, 0 + ry * 100);
 
-    //mx = map(mouseX, 0, window.innerWidth, 0, 1);
-    //my = map(mouseY, 0, window.innerWidth, 0, 6);
+    mx = map(mouseX, 0, window.innerWidth, 0, 1);
+    my = map(mouseY, 0, window.innerWidth, 0, 6);
 
     fill(0,0,255);
     textAlign(LEFT);
@@ -47,8 +48,8 @@ function draw() {
 
     if (go == 1){
         //console.log("Sending value:", mx);
-        sendMsgToWebPd("n_0_8", "0", [mx]);
-        sendMsgToWebPd("n_0_9", "0", [my]);
+        sendMsgToWebPd("n_0_8", "0", [rx]);
+        sendMsgToWebPd("n_0_9", "0", [ry]);
 
     }
 }
