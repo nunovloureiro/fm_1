@@ -8,6 +8,9 @@ let rx = 0;
 let i_ry = 0;
 let ry = 0;
 
+let i_rz = 0;
+let rz = 0;
+
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
     angleMode(RADIANS);
@@ -24,6 +27,9 @@ function draw() {
     i_ry = map(rotationY, 0, HALF_PI, 0, 4, true);
     ry = parseFloat(i_ry).toPrecision(2);
 
+    i_rz = map(rotationZ, -HALF_PI, HALF_PI, 0, 4, true);
+    rz = parseFloat(i_rz).toPrecision(2);
+
     rotationValueLimiter();
 
     background(0);
@@ -31,8 +37,11 @@ function draw() {
     fill(255, 0, 0);
     rect(window.innerWidth / 4, window.innerHeight / 2, 5, 0 + rx * 100);
 
-    fill(255, 0, 0);
+    fill(0, 255, 0);
     rect(window.innerWidth / 2, window.innerHeight / 2, 5, 0 + ry * 100);
+
+    fill(0, 0, 255);
+    rect(window.innerWidth - window.innerWidth / 4, window.innerHeight / 2, 5, 0 + rz * 100);
 
     mx = map(mouseX, 0, window.innerWidth, 0, 1);
     my = map(mouseY, 0, window.innerWidth, 0, 6);
@@ -42,14 +51,15 @@ function draw() {
     textSize(20);
     text('220Hz sine.freq.vol 1 ++', 20, 40);
     text('rx= ' + rx, 20, 80);
-    text('yx= ' + ry, 20, 100);
-    text('mx= ' + mx, 20, 120);
-    text('my= ' + my, 20, 140);
+    text('ry= ' + ry, 20, 100);
+    text('rz= ' + rz, 20, 120);
+    text('mx= ' + mx, 20, 140);
+    text('my= ' + my, 20, 160);
 
     if (go == 1){
         //console.log("Sending value:", mx);
         sendMsgToWebPd("n_0_8", "0", [rx]);
-        sendMsgToWebPd("n_0_9", "0", [ry]);
+        sendMsgToWebPd("n_0_9", "0", [rz]);
 
     }
 }
@@ -65,8 +75,8 @@ function checkAppStart() {
 }
 
 
-function rotationValueLimiter() {
-    rx = max(rx, 0);
-    ry = max(ry, 0);
-    // rz = max(rz, 0);
-}
+// function rotationValueLimiter() {
+//     rx = max(rx, 0);
+//     ry = max(ry, 0);
+    //rz = max(rz, 0);
+// }
