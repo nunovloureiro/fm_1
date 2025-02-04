@@ -30,13 +30,16 @@ function draw() {
     fill(255, 0, 0);
     rect(window.innerWidth / 4, window.innerHeight / 2, 5, 0 + rx * 100);
 
+    fill(255, 0, 0);
+    rect(window.innerWidth / 2, window.innerHeight / 2, 5, 0 + ry * 100);
+
     //mx = map(mouseX, 0, window.innerWidth, 0, 1);
     //my = map(mouseY, 0, window.innerWidth, 0, 6);
 
     fill(0,0,255);
     textAlign(LEFT);
     textSize(20);
-    text('220Hz sine.freq.vol ++', 20, 40);
+    text('220Hz sine.freq.vol 1 ++', 20, 40);
     text('rx= ' + rx, 20, 80);
     text('yx= ' + ry, 20, 100);
     text('mx= ' + mx, 20, 120);
@@ -44,8 +47,8 @@ function draw() {
 
     if (go == 1){
         //console.log("Sending value:", mx);
-        sendMsgToWebPd("n_0_8", "0", [rx]);
-        sendMsgToWebPd("n_0_9", "0", [ry]);
+        sendMsgToWebPd("n_0_8", "0", [mx]);
+        sendMsgToWebPd("n_0_9", "0", [my]);
 
     }
 }
