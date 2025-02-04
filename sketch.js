@@ -30,7 +30,7 @@ function draw() {
     i_rz = map(rotationZ, -HALF_PI, HALF_PI, 0, 4, true);
     rz = parseFloat(i_rz).toPrecision(2);
 
-    rotationValueLimiter();
+    // rotationValueLimiter();
 
     background(0);
 
