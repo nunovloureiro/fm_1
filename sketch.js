@@ -21,24 +21,24 @@ function setup() {
 
 function draw() {
 
-    i_rx = map(rotationX, 0, HALF_PI, 0, 1, true);
-    rx = parseFloat(i_rx).toPrecision(2);
+    // i_rx = map(rotationX, 0, HALF_PI, 0, 1, true);
+    rx = parseFloat(rotationX).toPrecision(2);
 
-    i_ry = map(rotationY, 0, HALF_PI, 0, 4, true);
-    ry = parseFloat(i_ry).toPrecision(2);
+    // i_ry = map(rotationY, 0, HALF_PI, 0, 4, true);
+    // ry = parseFloat(i_ry).toPrecision(2);
 
-    i_rz = map(rotationZ, 0, HALF_PI, 0, 4, true);
-    rz = parseFloat(i_rz).toPrecision(2);
+    // i_rz = map(rotationZ, 0, HALF_PI, 0, 4, true);
+    rz = parseFloat(rotationZ).toPrecision(2);
 
-    rotationValueLimiter();
+    // rotationValueLimiter();
 
     background(0);
 
     fill(255, 0, 0);
     rect(window.innerWidth / 4, window.innerHeight / 2, 5, 0 + rx * 100);
 
-    fill(0, 255, 0);
-    rect(window.innerWidth / 2, window.innerHeight / 2, 5, 0 + ry * 100);
+    // fill(0, 255, 0);
+    // rect(window.innerWidth / 2, window.innerHeight / 2, 5, 0 + ry * 100);
 
     fill(0, 0, 255);
     rect(window.innerWidth - window.innerWidth / 4, window.innerHeight / 2, 5, 0 + rz * 100);
@@ -49,17 +49,17 @@ function draw() {
     fill(0,0,255);
     textAlign(LEFT);
     textSize(20);
-    text('220Hz sine.freq.vol ++', 20, 40);
+    text('cell.osc ++', 20, 40);
     text('rx= ' + rx, 20, 80);
-    text('ry= ' + ry, 20, 100);
+    // text('ry= ' + ry, 20, 100);
     text('rz= ' + rz, 20, 120);
     text('mx= ' + mx, 20, 140);
     text('my= ' + my, 20, 160);
 
     if (go == 1){
         //console.log("Sending value:", mx);
-        sendMsgToWebPd("n_0_8", "0", [rx]);
-        sendMsgToWebPd("n_0_9", "0", [rz]);
+        sendMsgToWebPd("n_0_17", "0", [rx]); ///////RX parece ser o ID 17
+        sendMsgToWebPd("n_0_18", "0", [rz]); ///////RZ parece ser o ID 18
 
     }
 }
@@ -75,8 +75,8 @@ function checkAppStart() {
 }
 
 
-function rotationValueLimiter() {
-    rx = max(rx, 0);
-    ry = max(ry, 0);
-    rz = max(rz, 0);
-}
+// function rotationValueLimiter() {
+//     rx = max(rx, 0);
+//     ry = max(ry, 0);
+//     rz = max(rz, 0);
+// }

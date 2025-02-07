@@ -29,6 +29,9 @@
         </style>
     </head>
     <body>
+
+        
+
         <button id="start"> Start </button>
         <div id="loading"> Loading ... </div>
         <script src="webpd-runtime.js"></script>
@@ -55,8 +58,8 @@
                 await WebPdRuntime.initialize(audioContext)
 
                 // Fetch the patch code
-                response = await fetch('patch.js')
-                patch = await response.text()
+                response = await fetch('patch.wasm')
+                patch = await response.arrayBuffer()
 
                 // Comment this if you don't need audio input
                 //stream = await navigator.mediaDevices.getUserMedia({ audio: true })
@@ -81,7 +84,7 @@
                     audioContext, 
                     patch, 
                     WebPdRuntime.defaultSettingsForRun(
-                        './patch.js',
+                        './patch.wasm',
                         // Comment this if you don't need to receive messages from the patch
                        // receiveMsgFromWebPd,
                     ),
@@ -189,6 +192,7 @@
             }
             
         </script>
+        
         <script src="sketch.js"></script>
 
     </body>
