@@ -13,7 +13,7 @@ let rz = 0;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    angleMode(RADIANS);
+    angleMode(DEGREES);
     rectMode(CENTER);
 
     checkAppStart();
@@ -22,13 +22,13 @@ function setup() {
 function draw() {
 
     // i_rx = map(rotationX, 0, HALF_PI, 0, 1, true);
-    rx = parseFloat(rotationX).toPrecision(2);
+    rx = (parseFloat(rotationX).toFixed(2)) / 180;
 
     // i_ry = map(rotationY, 0, HALF_PI, 0, 4, true);
     // ry = parseFloat(i_ry).toPrecision(2);
 
     // i_rz = map(rotationZ, 0, HALF_PI, 0, 4, true);
-    rz = parseFloat(rotationZ).toPrecision(2);
+    rz = (parseFloat(rotationZ).toFixed(2)) / 180;
 
     // rotationValueLimiter();
 
@@ -59,8 +59,8 @@ function draw() {
     if (go == 1){
         console.log("go on");
         //console.log("Sending value:", mx);
-        //sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
-        //sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
+        sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
+        sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
 
     }
 }
