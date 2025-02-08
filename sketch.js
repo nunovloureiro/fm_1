@@ -57,9 +57,10 @@ function draw() {
     text('my= ' + my, 20, 160);
 
     if (go == 1){
+        console.log("go on");
         //console.log("Sending value:", mx);
-        sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
-        sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
+        //sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
+        //sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
 
     }
 }
