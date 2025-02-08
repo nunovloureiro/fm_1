@@ -58,8 +58,8 @@ function draw() {
 
     if (go == 1){
         //console.log("Sending value:", mx);
-        sendMsgToWebPd("n_0_17", "0", [rx]); ///////RX parece ser o ID 17
-        sendMsgToWebPd("n_0_18", "0", [rz]); ///////RZ parece ser o ID 18
+        sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
+        sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
 
     }
 }
