@@ -5,8 +5,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
-
         <title>WebPd boilerplate</title>
         <style>
             #start {
@@ -29,9 +27,8 @@
         </style>
     </head>
     <body>
-
-        
-
+        <h1>My Web Page</h1>
+        <div>For more info about usage (how to interact with the patch), you can open this HTML file in a code editor.</div>
         <button id="start"> Start </button>
         <div id="loading"> Loading ... </div>
         <script src="webpd-runtime.js"></script>
@@ -51,25 +48,21 @@
             let stream = null
             let webpdNode = null
 
-            
-
             const initApp = async () => {
                 // Register the worklet
                 await WebPdRuntime.initialize(audioContext)
 
                 // Fetch the patch code
-                response = await fetch('patch.wasm')
-                patch = await response.arrayBuffer()
+                response = await fetch('patch.js')
+                patch = await response.text()
 
                 // Comment this if you don't need audio input
-                //stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+                stream = await navigator.mediaDevices.getUserMedia({ audio: true })
 
                 // Hide loading and show start button
                 loadingDiv.style.display = 'none'
                 startButton.style.display = 'block'
             }
-
-            window.appStarted = false;
 
             const startApp = async () => {
                 // AudioContext needs to be resumed on click to protects users 
@@ -84,27 +77,22 @@
                     audioContext, 
                     patch, 
                     WebPdRuntime.defaultSettingsForRun(
-                        './patch.wasm',
+                        './patch.js',
                         // Comment this if you don't need to receive messages from the patch
-                       // receiveMsgFromWebPd,
+                        receiveMsgFromWebPd,
                     ),
                 )
-
-                // Log the webpdNode to check if it has been properly initialized
-                console.log("WebPdNode:", webpdNode);
-
                 webpdNode.connect(audioContext.destination)
 
                 // Comment this if you don't need audio input
-                //const sourceNode = audioContext.createMediaStreamSource(stream)
-                //sourceNode.connect(webpdNode)
+                const sourceNode = audioContext.createMediaStreamSource(stream)
+                sourceNode.connect(webpdNode)
 
                 // Hide the start button
                 startButton.style.display = 'none'
-                window.appStarted = true;
             }
 
-            startButton.onclick = startApp;
+            startButton.onclick = startApp
 
             initApp().
                 then(() => {
@@ -142,18 +130,88 @@
             
             // Here is an index of objects IDs to which you can send messages, with hints so you can find the right ID.
             // Note that by default only GUI objects (bangs, sliders, etc ...) are available.
-            //  - nodeId "n_0_3" portletId "0"
-            //      * type "msg"
-            //      * position 206 61
-            
-            //  - nodeId "n_0_7" portletId "0"
-            //      * type "msg"
-            //      * position 144 173
+            //  - nodeId "n_0_2" portletId "0"
+            //      * type "hsl"
+            //      * position 209 386
+            //      * label "vol"
             
             //  - nodeId "n_0_8" portletId "0"
-            //      * type "floatatom"
-            //      * position 144 149
-            //      * label "vol"
+            //      * type "msg"
+            //      * position 75 101
+            
+            //  - nodeId "n_0_9" portletId "0"
+            //      * type "vsl"
+            //      * position 454 151
+            //      * label "rX"
+            
+            //  - nodeId "n_0_10" portletId "0"
+            //      * type "vsl"
+            //      * position 515 151
+            //      * label "rZ"
+            
+            //  - nodeId "n_0_15" portletId "0"
+            //      * type "msg"
+            //      * position 141 137
+            
+            //  - nodeId "n_0_16" portletId "0"
+            //      * type "msg"
+            //      * position 159 111
+            
+            //  - nodeId "n_0_17" portletId "0"
+            //      * type "msg"
+            //      * position 175 137
+            
+            //  - nodeId "n_0_18" portletId "0"
+            //      * type "msg"
+            //      * position 191 111
+            
+            //  - nodeId "n_0_19" portletId "0"
+            //      * type "msg"
+            //      * position 212 137
+            
+            //  - nodeId "n_0_20" portletId "0"
+            //      * type "msg"
+            //      * position 246 137
+            
+            //  - nodeId "n_0_21" portletId "0"
+            //      * type "msg"
+            //      * position 264 111
+            
+            //  - nodeId "n_0_22" portletId "0"
+            //      * type "msg"
+            //      * position 280 137
+            
+            //  - nodeId "n_0_23" portletId "0"
+            //      * type "msg"
+            //      * position 296 111
+            
+            //  - nodeId "n_0_24" portletId "0"
+            //      * type "msg"
+            //      * position 317 137
+            
+            //  - nodeId "n_0_25" portletId "0"
+            //      * type "msg"
+            //      * position 328 111
+            
+            //  - nodeId "n_0_26" portletId "0"
+            //      * type "msg"
+            //      * position 351 137
+            
+            //  - nodeId "n_0_27" portletId "0"
+            //      * type "msg"
+            //      * position 130 205
+            
+            //  - nodeId "n_0_28" portletId "0"
+            //      * type "msg"
+            //      * position 164 205
+            
+            //  - nodeId "n_0_29" portletId "0"
+            //      * type "msg"
+            //      * position 199 205
+            
+            //  - nodeId "n_0_30" portletId "0"
+            //      * type "msg"
+            //      * position 231 205
             
 
             // ------------- 3. SENDING MESSAGES FROM THE PATCH TO JAVASCRIPT
@@ -167,33 +225,151 @@
             // - portletId : the ID of the object portlet that is sending the message.
             // - message : the message that was sent. It is a list of strings and / or numbers.
             const receiveMsgFromWebPd = (nodeId, portletId, message) => {
-                if (nodeId === "n_0_3" && portletId === "0") {
+                if (nodeId === "n_0_2" && portletId === "0") {
                     console.log('Message received from :\n'
-                        + '	* nodeId "n_0_3" portletId "0"\n'
-                        + '	* type "msg"\n'
-                        + '	* position 206 61\n'
-                    )
-                }
-                if (nodeId === "n_0_7" && portletId === "0") {
-                    console.log('Message received from :\n'
-                        + '	* nodeId "n_0_7" portletId "0"\n'
-                        + '	* type "msg"\n'
-                        + '	* position 144 173\n'
+                        + '	* nodeId "n_0_2" portletId "0"\n'
+                        + '	* type "hsl"\n'
+                        + '	* position 209 386\n'
+                        + '	* label "vol"'
                     )
                 }
                 if (nodeId === "n_0_8" && portletId === "0") {
                     console.log('Message received from :\n'
                         + '	* nodeId "n_0_8" portletId "0"\n'
-                        + '	* type "floatatom"\n'
-                        + '	* position 144 149\n'
-                        + '	* label "vol"'
+                        + '	* type "msg"\n'
+                        + '	* position 75 101\n'
+                    )
+                }
+                if (nodeId === "n_0_9" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_9" portletId "0"\n'
+                        + '	* type "vsl"\n'
+                        + '	* position 454 151\n'
+                        + '	* label "rX"'
+                    )
+                }
+                if (nodeId === "n_0_10" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_10" portletId "0"\n'
+                        + '	* type "vsl"\n'
+                        + '	* position 515 151\n'
+                        + '	* label "rZ"'
+                    )
+                }
+                if (nodeId === "n_0_15" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_15" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 141 137\n'
+                    )
+                }
+                if (nodeId === "n_0_16" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_16" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 159 111\n'
+                    )
+                }
+                if (nodeId === "n_0_17" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_17" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 175 137\n'
+                    )
+                }
+                if (nodeId === "n_0_18" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_18" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 191 111\n'
+                    )
+                }
+                if (nodeId === "n_0_19" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_19" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 212 137\n'
+                    )
+                }
+                if (nodeId === "n_0_20" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_20" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 246 137\n'
+                    )
+                }
+                if (nodeId === "n_0_21" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_21" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 264 111\n'
+                    )
+                }
+                if (nodeId === "n_0_22" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_22" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 280 137\n'
+                    )
+                }
+                if (nodeId === "n_0_23" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_23" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 296 111\n'
+                    )
+                }
+                if (nodeId === "n_0_24" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_24" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 317 137\n'
+                    )
+                }
+                if (nodeId === "n_0_25" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_25" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 328 111\n'
+                    )
+                }
+                if (nodeId === "n_0_26" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_26" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 351 137\n'
+                    )
+                }
+                if (nodeId === "n_0_27" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_27" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 130 205\n'
+                    )
+                }
+                if (nodeId === "n_0_28" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_28" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 164 205\n'
+                    )
+                }
+                if (nodeId === "n_0_29" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_29" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 199 205\n'
+                    )
+                }
+                if (nodeId === "n_0_30" && portletId === "0") {
+                    console.log('Message received from :\n'
+                        + '	* nodeId "n_0_30" portletId "0"\n'
+                        + '	* type "msg"\n'
+                        + '	* position 231 205\n'
                     )
                 }                
             }
-            
-        </script>
-        
-        <script src="sketch.js"></script>
 
+        </script>
     </body>
 </html>
