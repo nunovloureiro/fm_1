@@ -13,7 +13,7 @@ let rz = 0;
 
 function setup() {
     createCanvas(window.innerWidth, window.innerHeight);
-    angleMode(DEGREES);
+    angleMode(RADIANS);
     rectMode(CENTER);
 
     checkAppStart();
@@ -22,15 +22,15 @@ function setup() {
 function draw() {
 
     // i_rx = map(rotationX, 0, HALF_PI, 0, 1, true);
-    rx = (parseFloat(rotationX).toFixed(2)) / 180;
+    rx = (parseFloat(rotationX).toFixed(2)) / PI;
 
     // i_ry = map(rotationY, 0, HALF_PI, 0, 4, true);
     // ry = parseFloat(i_ry).toPrecision(2);
 
     // i_rz = map(rotationZ, 0, HALF_PI, 0, 4, true);
-    rz = (parseFloat(rotationZ).toFixed(2)) / 180;
+    rz = (parseFloat(rotationZ).toFixed(2)) / PI;
 
-    // rotationValueLimiter();
+    rotationValueLimiter();
 
     background(0);
 
@@ -76,8 +76,8 @@ function checkAppStart() {
 }
 
 
-// function rotationValueLimiter() {
-//     rx = max(rx, 0);
-//     ry = max(ry, 0);
-//     rz = max(rz, 0);
-// }
+function rotationValueLimiter() {
+    rx = max(rx, 0);
+    ry = max(ry, 0);
+    rz = max(rz, 0);
+}
