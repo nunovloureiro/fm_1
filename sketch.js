@@ -208,14 +208,14 @@ function mousePressed(){
               .then(() => {
                 //subsequent visits. permission already granted
                 // permissionGranted = true;
-                return;
               })
           }
           requestButton = 1;
         }
+       }
 
-        startApp(); //starts webPD audio app
-        return;
+      startApp(); //starts webPD audio app
+      return;
       }
     
     //menu enter
