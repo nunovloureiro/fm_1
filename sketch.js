@@ -28,6 +28,8 @@ let teclasPretas = [];
 let teclado = [];
 let keyID;
 
+document.addEventListener('touchstart', {});
+
 function preload(){
   font = loadFont('tiny5.ttf');
 }
