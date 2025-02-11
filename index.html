@@ -29,10 +29,11 @@
         </style>
     </head>
     <body>
-
+        <script src="kbKey.js"></script>
+        <script src="sketch.js"></script>
         
 
-        <button id="start"> Start </button>
+        //<button id="start"> Start </button>
         <div id="loading"> Loading ... </div>
         <script src="webpd-runtime.js"></script>
         <script>
@@ -66,7 +67,7 @@
 
                 // Hide loading and show start button
                 loadingDiv.style.display = 'none'
-                startButton.style.display = 'block'
+                //startButton.style.display = 'block'
             }
 
             window.appStarted = false;
@@ -100,11 +101,12 @@
                 //sourceNode.connect(webpdNode)
 
                 // Hide the start button
-                startButton.style.display = 'none'
+                //startButton.style.display = 'none'
                 window.appStarted = true;
             }
-
-            startButton.onclick = startApp;
+            
+            
+            //startButton.onclick = startApp;
 
             initApp().
                 then(() => {
@@ -192,8 +194,7 @@
             }
             
         </script>
-        <script src="kbKey.js"></script>
-        <script src="sketch.js"></script>
+        
 
     </body>
 </html>

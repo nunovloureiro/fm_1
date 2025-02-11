@@ -84,17 +84,17 @@ function draw() {
     textSize(20);
     text('cell.osc ++', 20, 40);
     text('rx= ' + rx, 20, 80);
-    // text('ry= ' + ry, 20, 100);
+    text('ry= ' + ry, 20, 100);
     text('rz= ' + rz, 20, 120);
     text('mx= ' + mx, 20, 140);
     text('my= ' + my, 20, 160);
 
-    if (go == 1){
-        console.log("go on");
-        //console.log("Sending value:", mx);
-        // sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
-        // sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
-    }
+    // if (go == 1){
+    //     console.log("go on");
+    //     //console.log("Sending value:", mx);
+    //     // sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
+    //     // sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
+    // }
 }
 
 
@@ -158,8 +158,8 @@ function gui(){
         textAlign(CENTER,CENTER);
         text('+', window.innerWidth/2, window.innerHeight/2);
 
-        // sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
-        // sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
+        sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
+        sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
 
     }
     
@@ -194,6 +194,7 @@ function mousePressed(){
     //play screen
     if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
         go = 1
+        startApp(); //starts webPD audio app
         return;
       }
     
@@ -211,7 +212,7 @@ function mousePressed(){
      }
 
     //menu exit to play screen
-    if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 - window.innerHeight/8 - textHeight && mouseY < window.innerHeight/2 + window.innerHeight/8 + textHeight){
+    if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 + window.innerHeight/8 - textHeight && mouseY < window.innerHeight/2 + window.innerHeight/8 + textHeight){
         menu = 0;
         go = 1;
         keyMenu = 0;
