@@ -187,7 +187,7 @@ function gui(){
   }
   
 function mousePressed(){
-  
+  requestMotionPermission()
     //play screen
     if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
         go = 1
@@ -299,3 +299,19 @@ function initKeyboard(){
        }
     }
   }
+
+function requestMotionPermission() {
+  if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+      DeviceMotionEvent.requestPermission()
+          .then(permissionState => {
+              if (permissionState === 'granted') {
+                  window.addEventListener('deviceorientation', (event) => {
+                      console.log('Motion Data:', event);
+                  });
+              }
+          })
+          .catch(console.error);
+  } else {
+      console.log('DeviceMotionEvent not supported or permission not needed.');
+  }
+}
