@@ -72,8 +72,6 @@ function draw() {
     rz = rotationZ / PI;
     rotationValueLimiter();
 
-    
-
     fill(255, 0, 0);
     rect(window.innerWidth / 4, window.innerHeight / 2, 5, 0 + rx * 100);
 
@@ -97,7 +95,6 @@ function draw() {
     text('my= ' + my, 20, 160);
 }
 
-
 function checkAppStart() {
     if (window.appStarted && go == 0) {
         console.log("App started, initializing sketch.js features.");
@@ -106,7 +103,6 @@ function checkAppStart() {
         setTimeout(checkAppStart, 100); // Check again in 100ms
     }
 }
-
 
 function rotationValueLimiter() {
     rx = max(rx, 0);
@@ -205,8 +201,7 @@ function mousePressed(){
           })
           .then(() => {
             //subsequent visits. permission already granted
-            // permissionGranted = true;
-            // return;
+            permissionGranted = true;
             requestButton = 1;
           })
           
@@ -217,8 +212,9 @@ function mousePressed(){
 
       //play screen
       if (go == 0 && requestButton == 1 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-          go = 1
+        go = 1
           startApp(); //starts webPD audio app
+          return;
         }
        
     
