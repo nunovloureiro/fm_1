@@ -211,7 +211,7 @@ function mousePressed(){
      }
 
     //menu exit to play screen
-    if (go == 1 && menu == 1 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 - window.innerHeight/8 - textHeight && mouseY < window.innerHeight/2 + window.innerHeight/8 + textHeight){
+    if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 - window.innerHeight/8 - textHeight && mouseY < window.innerHeight/2 + window.innerHeight/8 + textHeight){
         menu = 0;
         go = 1;
         keyMenu = 0;
