@@ -18,7 +18,7 @@ let scaleMenu = 0;
 let wkPos;
 let bkPos;
 let keySize;
-let wkeyVertOfset;A
+let wkeyVertOfset;
 let bkeyVertOfset;
 let keyVertDist;
 let keyboardSW;
