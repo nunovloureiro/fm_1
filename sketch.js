@@ -139,7 +139,7 @@ function gui(){
   
     //startup screen
     if (go == 0 && menu == 0 && keyMenu == 0){
-      background(255,0,0);
+      background(0,255 ,0);
       fill(0,0,255);
       rectMode(CENTER);
       rect(window.innerWidth/2, window.innerHeight/2, TWstartText + window.innerWidth/70, window.innerWidth/5);
@@ -151,7 +151,7 @@ function gui(){
     } 
     // play screen
     if (go == 1 && menu == 0 && keyMenu == 0){
-        background(255,0,0);
+        background(0,255,0);
         fill(0,0,255);
         rectMode(CENTER);
         rect(window.innerWidth/2, window.innerHeight/2, window.innerWidth/5, window.innerWidth/5);
@@ -211,6 +211,8 @@ function mousePressed(){
           })
           
         }
+      } else {
+        requestButton = 1
       }
 
       //play screen
