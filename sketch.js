@@ -201,13 +201,15 @@ function mousePressed(){
           .catch(() => {
             //show permission dialogue on the first time
             requestSensorPermissions();
+            requestButton = 1;
           })
           .then(() => {
             //subsequent visits. permission already granted
             // permissionGranted = true;
             // return;
+            requestButton = 1;
           })
-          requestButton = 1;
+          
         }
       }
 
