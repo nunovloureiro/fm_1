@@ -41,6 +41,7 @@ function preload(){
 function setup() {
 
     createCanvas(window.innerWidth, window.innerHeight);
+    frameRate(15);
     angleMode(RADIANS);
     rectMode(CENTER);
 
