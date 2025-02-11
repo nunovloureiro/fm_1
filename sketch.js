@@ -44,19 +44,6 @@ function setup() {
     angleMode(RADIANS);
     rectMode(CENTER);
 
-    // if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
-    //   //iOS device
-    //   DeviceOrientationEvent.requestPermission()
-    //     .catch(() => {
-    //       //show permission dialogue on the first time
-    //       let requestButton = 1;
-    //     })
-    //     .then(() => {
-    //       //subsequent visits. permission already granted
-    //       permissionGranted = true;
-    //     })
-    // }
-
     checkAppStart();
 
 
@@ -205,7 +192,26 @@ function gui(){
   }
   
 function mousePressed(){
-  requestSensorPermissions();
+
+  if (requestButton == 0){
+    if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
+      //iOS device
+      DeviceOrientationEvent.requestPermission()
+        .catch(() => {
+          //show permission dialogue on the first time
+          requestSensorPermissions();
+        })
+        .then(() => {
+          //subsequent visits. permission already granted
+          // permissionGranted = true;
+        })
+    }
+    requestButton = 1;
+  }
+
+
+
+  //requestSensorPermissions();
       //play screen
     if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
         go = 1
