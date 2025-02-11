@@ -8,7 +8,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
 
         <title>WebPd boilerplate</title>
-        <style>
+        <!-- <style>
             #start {
                 display: none;
                 position: fixed;
@@ -26,15 +26,37 @@
                 justify-content: center;
                 align-items: center;
             }
+        </style> -->
+
+        <style>
+            * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Ensures padding and borders do not affect layout */
+            }
+
+            body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Prevents scrolling */
+            background: black;
+            }
+
+            body {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Centers the content if needed */
+            }
         </style>
+
     </head>
     <body>
         <script src="kbKey.js"></script>
         <script src="sketch.js"></script>
         
 
-        //<button id="start"> Start </button>
-        <div id="loading"> Loading ... </div>
+        <!-- <button id="start"> Start </button>
+        <div id="loading"> Loading ... </div> -->
         <script src="webpd-runtime.js"></script>
         <script>
             // SUMMARY
@@ -66,7 +88,7 @@
                 //stream = await navigator.mediaDevices.getUserMedia({ audio: true })
 
                 // Hide loading and show start button
-                loadingDiv.style.display = 'none'
+                // loadingDiv.style.display = 'none'
                 //startButton.style.display = 'block'
             }
 
