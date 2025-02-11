@@ -195,7 +195,7 @@ function mousePressed(){
 
       //play screen
     if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-        go = 1
+        
 
         if (requestButton == 0){
           if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
@@ -210,6 +210,7 @@ function mousePressed(){
                 // permissionGranted = true;
               })
           }
+          go = 1
           startApp(); //starts webPD audio app
           requestButton = 1;
         }
