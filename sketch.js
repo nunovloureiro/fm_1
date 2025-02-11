@@ -88,13 +88,6 @@ function draw() {
     text('rz= ' + rz, 20, 120);
     text('mx= ' + mx, 20, 140);
     text('my= ' + my, 20, 160);
-
-    // if (go == 1){
-    //     console.log("go on");
-    //     //console.log("Sending value:", mx);
-    //     // sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
-    //     // sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
-    // }
 }
 
 
@@ -145,6 +138,7 @@ function gui(){
       rect(window.innerWidth/2, window.innerHeight/2, TWstartText + window.innerWidth/70, window.innerWidth/5);
       fill(0);
       textAlign(CENTER,CENTER);
+      textSize(window.innerWidth/5);
       text('start', window.innerWidth/2, window.innerHeight/2)
       
     } 
@@ -156,6 +150,7 @@ function gui(){
         rect(window.innerWidth/2, window.innerHeight/2, window.innerWidth/5, window.innerWidth/5);
         fill(0);
         textAlign(CENTER,CENTER);
+        textSize(window.innerWidth/5);
         text('+', window.innerWidth/2, window.innerHeight/2);
 
         sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
@@ -169,10 +164,10 @@ function gui(){
       fill(0);
       textSize(window.innerWidth/5);
       textAlign(CENTER, CENTER);
-      text('key', window.innerWidth/2, window.innerHeight/2 - window.innerHeight/8);
+      text('key', window.innerWidth/2, window.innerHeight/2 - window.innerHeight/8 - textHeight);
       text('scale', window.innerWidth/2, window.innerHeight/2);
       textSize(window.innerWidth/5);
-      text('x', window.innerWidth/2, window.innerHeight/2 + window.innerHeight/8);
+      text('x', window.innerWidth/2, window.innerHeight/2 + window.innerHeight/8 + textHeight);
     }
     
     //key menu
@@ -212,7 +207,7 @@ function mousePressed(){
      }
 
     //menu exit to play screen
-    if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 + window.innerHeight/8 - textHeight && mouseY < window.innerHeight/2 + window.innerHeight/8 + textHeight){
+    if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 + window.innerHeight/8 + textHeight/2 && mouseY < window.innerHeight/2 + window.innerHeight/8 + 2*textHeight){
         menu = 0;
         go = 1;
         keyMenu = 0;
