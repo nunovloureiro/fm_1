@@ -210,11 +210,12 @@ function mousePressed(){
                 // permissionGranted = true;
               })
           }
+          startApp(); //starts webPD audio app
           requestButton = 1;
         }
        }
 
-      startApp(); //starts webPD audio app
+      
       return;
     
     
