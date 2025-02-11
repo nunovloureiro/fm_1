@@ -92,9 +92,8 @@ function draw() {
     if (go == 1){
         console.log("go on");
         //console.log("Sending value:", mx);
-        sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
-        sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
-
+        // sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
+        // sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
     }
 }
 
@@ -145,11 +144,12 @@ function gui(){
       rectMode(CENTER);
       rect(window.innerWidth/2, window.innerHeight/2, TWstartText + window.innerWidth/70, window.innerWidth/5);
       fill(0);
+      textAlign(CENTER,CENTER);
       text('start', window.innerWidth/2, window.innerHeight/2)
       
     } 
     // play screen
-      else { if (go == 1 && menu == 0 && keyMenu == 0){
+    if (go == 1 && menu == 0 && keyMenu == 0){
         background(0);
         fill(0,0,255);
         rectMode(CENTER);
@@ -157,13 +157,18 @@ function gui(){
         fill(0);
         textAlign(CENTER,CENTER);
         text('+', window.innerWidth/2, window.innerHeight/2);
-        }
-        }
+
+        // sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
+        // sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
+
+    }
     
     //menu screen
     if (go == 1 && menu == 1 && keyMenu == 0){
       background(0,0,255);
+      fill(0);
       textSize(window.innerWidth/5);
+      textAlign(CENTER, CENTER);
       text('key', window.innerWidth/2, window.innerHeight/2 - window.innerHeight/8);
       text('scale', window.innerWidth/2, window.innerHeight/2);
       textSize(window.innerWidth/5);
@@ -177,7 +182,8 @@ function gui(){
       
       noStroke();
       fill(0);
-      textSize(window.innerWidth/5)
+      textSize(window.innerWidth/5);
+      textAlign(CENTER, CENTER);
       text('x', window.innerWidth/2, window.innerHeight - window.innerHeight/10);
     }
     
@@ -203,7 +209,14 @@ function mousePressed(){
         keyMenu = 1;
         //return;
      }
-    
+
+    //menu exit to play screen
+    if (go == 1 && menu == 1 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 - window.innerHeight/8 - textHeight && mouseY < window.innerHeight/2 + window.innerHeight/8 + textHeight){
+        menu = 0;
+        go = 1;
+        keyMenu = 0;
+     }
+
     //keyMenu Changes
     if (keyMenu == 1 && menu == 0){
         let newHitKey = null;
