@@ -18,7 +18,7 @@ let scaleMenu = 0;
 let wkPos;
 let bkPos;
 let keySize;
-let wkeyVertOfset;
+let wkeyVertOfset;A
 let bkeyVertOfset;
 let keyVertDist;
 let keyboardSW;
@@ -317,6 +317,11 @@ function initKeyboard(){
        }
     }
   }
+
+  function touchStarted() {
+    mousePressed(); // Calls the same logic for touch
+  }
+
 
   function requestSensorPermissions() {
     // Set up default promises that resolve to "granted" for browsers that don't need permission.
