@@ -198,24 +198,33 @@ function mousePressed(){
             //show permission dialogue on the first time
             requestSensorPermissions();
             requestButton = 1;
+            go = 1;
+            startApp(); //starts webPD audio app
+
           })
           .then(() => {
             //subsequent visits. permission already granted
             permissionGranted = true;
             requestButton = 1;
+            go = 1;
+            startApp(); //starts webPD audio app
+
           })
           
         }
       } else {
-        requestButton = 1
+        requestButton = 1;
+        go = 1;
+        startApp(); //starts webPD audio app
+        //return;
       }
 
       //play screen  && requestButton == 1
-      if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-        go = 1
-          startApp(); //starts webPD audio app
-          return;
-        }
+      // if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+      //   go = 1
+      //     startApp(); //starts webPD audio app
+      //     return;
+      //   }
        
     
     
