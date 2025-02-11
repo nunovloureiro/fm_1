@@ -216,7 +216,7 @@ function mousePressed(){
 
       startApp(); //starts webPD audio app
       return;
-      }
+    
     
     //menu enter
       if (go == 1 && menu == 0 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight ){
