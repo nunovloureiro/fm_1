@@ -210,8 +210,8 @@ function mousePressed(){
         requestButton = 1
       }
 
-      //play screen
-      if (go == 0 && requestButton == 1 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+      //play screen  && requestButton == 1
+      if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
         go = 1
           startApp(); //starts webPD audio app
           return;
