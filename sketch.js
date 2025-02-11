@@ -28,16 +28,34 @@ let teclasPretas = [];
 let teclado = [];
 let keyID;
 
-document.addEventListener('touchstart', {});
+let permissionGranted = false;
+let requestButton = 0;
+
+
+//document.addEventListener('touchstart', {});
 
 function preload(){
   font = loadFont('tiny5.ttf');
 }
 
 function setup() {
+
     createCanvas(window.innerWidth, window.innerHeight);
     angleMode(RADIANS);
     rectMode(CENTER);
+
+    // if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
+    //   //iOS device
+    //   DeviceOrientationEvent.requestPermission()
+    //     .catch(() => {
+    //       //show permission dialogue on the first time
+    //       let requestButton = 1;
+    //     })
+    //     .then(() => {
+    //       //subsequent visits. permission already granted
+    //       permissionGranted = true;
+    //     })
+    // }
 
     checkAppStart();
 
@@ -187,8 +205,8 @@ function gui(){
   }
   
 function mousePressed(){
-  requestMotionPermission()
-    //play screen
+  requestSensorPermissions();
+      //play screen
     if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
         go = 1
         startApp(); //starts webPD audio app
@@ -300,18 +318,42 @@ function initKeyboard(){
     }
   }
 
-function requestMotionPermission() {
-  if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-      DeviceMotionEvent.requestPermission()
-          .then(permissionState => {
-              if (permissionState === 'granted') {
-                  window.addEventListener('deviceorientation', (event) => {
-                      console.log('Motion Data:', event);
-                  });
-              }
-          })
-          .catch(console.error);
-  } else {
-      console.log('DeviceMotionEvent not supported or permission not needed.');
+  function requestSensorPermissions() {
+    // Set up default promises that resolve to "granted" for browsers that don't need permission.
+    let motionPromise = Promise.resolve('granted');
+    let orientationPromise = Promise.resolve('granted');
+  
+    // Check and request permission for Device Motion (if needed)
+    if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+      motionPromise = DeviceMotionEvent.requestPermission();
+    }
+  
+    // Check and request permission for Device Orientation (if needed)
+    if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+      orientationPromise = DeviceOrientationEvent.requestPermission();
+    }
+  
+    // Request both permissions concurrently
+    Promise.all([motionPromise, orientationPromise])
+      .then(([motionPermission, orientationPermission]) => {
+        if (motionPermission === 'granted' && orientationPermission === 'granted') {
+          console.log("Both sensor permissions granted.");
+  
+          // Add event listeners for motion and orientation data.
+          window.addEventListener('devicemotion', (event) => {
+            console.log('Motion Data:', event);
+            // You can use event.acceleration, event.rotationRate, etc.
+          });
+  
+          window.addEventListener('deviceorientation', (event) => {
+            console.log('Orientation Data:', event);
+            // Use event.alpha, event.beta, and event.gamma as needed.
+          });
+        } else {
+          console.error("Permission for one or both sensors was not granted.");
+        }
+      })
+      .catch(error => {
+        console.error("Error requesting sensor permissions:", error);
+      });
   }
-}
