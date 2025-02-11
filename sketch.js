@@ -193,32 +193,30 @@ function gui(){
   
 function mousePressed(){
 
-      //play screen
-    if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-        
-
-        if (requestButton == 0){
-          if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
-            //iOS device
-            DeviceOrientationEvent.requestPermission()
-              .catch(() => {
-                //show permission dialogue on the first time
-                requestSensorPermissions();
-              })
-              .then(() => {
-                //subsequent visits. permission already granted
-                // permissionGranted = true;
-                return;
-              })
-          }
-          go = 1
-          startApp(); //starts webPD audio app
+      //request
+    if (requestButton == 0 && go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+      if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
+        //iOS device
+        DeviceOrientationEvent.requestPermission()
+          .catch(() => {
+            //show permission dialogue on the first time
+            requestSensorPermissions();
+          })
+          .then(() => {
+            //subsequent visits. permission already granted
+            // permissionGranted = true;
+            return;
+          })
           requestButton = 1;
         }
-       }
+      }
 
-      
-      return;
+      //play screen
+      if (go == 0 && requestButton == 1 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+          go = 1
+          startApp(); //starts webPD audio app
+        }
+       
     
     
     //menu enter
