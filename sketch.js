@@ -208,6 +208,7 @@ function mousePressed(){
               .then(() => {
                 //subsequent visits. permission already granted
                 // permissionGranted = true;
+                return;
               })
           }
           go = 1
