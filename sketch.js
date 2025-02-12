@@ -239,11 +239,11 @@ function mousePressed(){
             })
         } else {
           requestButton = 1;
-          // androidStop = 1;
-          go = 1;
-          startApp();
-          return;
         }
+        // androidStop = 1;
+        go = 1;
+        startApp();
+        return;
       }
     
     //menu enter
