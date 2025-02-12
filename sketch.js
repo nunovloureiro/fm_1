@@ -136,7 +136,7 @@ function gui(){
   
     //startup screen
     if (go == 0 && menu == 0 && keyMenu == 0){
-      background(0);
+      background(50);
       fill(0,0,255);
       rectMode(CENTER);
       rect(window.innerWidth/2, window.innerHeight/2, TWstartText + window.innerWidth/70, window.innerWidth/5);
@@ -147,7 +147,7 @@ function gui(){
       
     } 
     // play screen
-    if (go == 1 && menu == 0 && keyMenu == 0){
+    if (go === 1 && menu === 0 && keyMenu === 0 && webpdNode && webpdNode.engine){
         background(0);
         fill(0,0,255);
         rectMode(CENTER);
