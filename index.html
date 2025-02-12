@@ -8,7 +8,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
 
         <title>WebPd boilerplate</title>
-        <!-- <style>
+        <style>
             #start {
                 display: none;
                 position: fixed;
@@ -16,7 +16,7 @@
                 left: 50%;
                 transform: translate(-50%, -50%);
             }
-            #loading {
+            /* #loading {
                 width: 100%;
                 height: 100%;
                 position: fixed;
@@ -25,8 +25,8 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-            }
-        </style> -->
+            } */
+        </style>
 
         <style>
             * {
@@ -85,7 +85,7 @@
 
                 // Hide loading and show start button
                 // loadingDiv.style.display = 'none'
-                //startButton.style.display = 'block'
+                startButton.style.display = 'block'
             }
 
             window.appStarted = false;
@@ -105,7 +105,7 @@
                     WebPdRuntime.defaultSettingsForRun(
                         './patch.wasm',
                         // Comment this if you don't need to receive messages from the patch
-                        receiveMsgFromWebPd,
+                        //receiveMsgFromWebPd,
                     ),
                 )
 
@@ -119,13 +119,14 @@
                 //sourceNode.connect(webpdNode)
 
                 // Hide the start button
-                //startButton.style.display = 'none'
+                startButton.style.display = 'none'
                 window.appStarted = true;
                 console.log("window.appStarted - html", window.appStarted);
+                console.log("webpdNode.connect", webpdNode.connect);
             }
             
             
-            //startButton.onclick = startApp;
+            startButton.onclick = startApp;
 
             initApp().
                 then(() => {

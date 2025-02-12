@@ -313,14 +313,14 @@ function gui(){
     //play screen  && requestButton == 1
       if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
         if (iOSpermissions === 0){
-          startApp(); //starts webPD audio app
+          // startApp(); //starts webPD audio app
           checkAppStart();
           console.log('WebPD started supostamente');
           return;
         } else if (iOSpermissions === 1){
             requestMotionSensorPermission();
             if (permissionGranted === 1){
-              startApp(); //starts webPD audio app
+              // startApp(); //starts webPD audio app
               checkAppStart();
               console.log('WebPD started supostamente');
               return;
