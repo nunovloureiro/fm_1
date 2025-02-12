@@ -28,11 +28,11 @@ let teclasPretas = [];
 let teclado = [];
 let keyID;
 
-let permissionGranted = false;
+let permissionGranted = 0;
 let requestButton = 0;
 let androidStop = 0;
 
-let iOS = 0;
+let iOSpermissions = 0;
 
 // let initTouch = 0;
 
@@ -209,10 +209,22 @@ function mousePressed(){
 
     //play screen  && requestButton == 1
       if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-        startApp(); //starts webPD audio app
-        checkAppStart();
-        console.log('WebPD started supostamente');
-        return;
+        if (iOSpermissions === 0){
+          startApp(); //starts webPD audio app
+          checkAppStart();
+          console.log('WebPD started supostamente');
+          return;
+        } else if (iOSpermissions === 1){
+            requestMotionSensorPermission();
+            if (permissionGranted === 1){
+              startApp(); //starts webPD audio app
+              checkAppStart();
+              console.log('WebPD started supostamente');
+              return;
+            } else {
+              fill(255,0,0);
+            }
+        }
       }
     
     //menu enter
@@ -343,16 +355,17 @@ function initKeyboard(){
     const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (!isiOS) {
       console.log("Not an iOS device. No sensor permission needed.");
+      iOSpermissions = 0;
       return;
     }
     else {
       console.log("iOS device. Sensor permission needed.");
+      iOSpermissions = 1;
     }
   }
 
 
   function requestMotionSensorPermission() {
-    
     
     // For iOS 13+ where permission is required
     if (typeof DeviceMotionEvent !== "undefined" &&
@@ -361,19 +374,23 @@ function initKeyboard(){
         .then(response => {
           if (response === "granted") {
             console.log("Motion sensor permission granted!");
+            
             // Attach a listener if you want to process sensor data
             window.addEventListener("devicemotion", (event) => {
               // Process sensor data here if needed
               console.log("Acceleration:", event.acceleration);
               console.log("Acceleration including gravity:", event.accelerationIncludingGravity);
               console.log("Rotation rate:", event.rotationRate);
+              permissionGranted = 1;
             });
           } else {
             console.error("Motion sensor permission denied.");
+            permissionGranted = 0;
           }
         })
         .catch(error => {
           console.error("Error requesting motion sensor permission:", error);
+          permissionGranted = 0;
         });
     } else {
       // Fallback for devices or browsers that don't require a permission prompt
