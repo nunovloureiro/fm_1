@@ -197,10 +197,10 @@ function gui(){
     
   }
   
-function touchStarted(){
+function mousePressed(){
 
     //play screen  && requestButton == 1
-      if (go == 0 && touch.x > window.innerWidth/2 - TWstartText/2 && touch.x < window.innerWidth/2 + TWstartText/2 && touch.y > window.innerHeight/2 - textHeight && touch.y < window.innerHeight/2 + textHeight){
+      if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
         startApp(); //starts webPD audio app
         checkAppStart();
         console.log('WebPD started supostamente');
@@ -208,20 +208,20 @@ function touchStarted(){
       }
     
     //menu enter
-      if (go == 1 && menu == 0 && keyMenu == 0 && touch.x > window.innerWidth/2 - window.innerWidth/10 && touch.x < window.innerWidth/2 + window.innerWidth/10 && touch.y > window.innerHeight/2 - textHeight && touch.y < window.innerHeight/2 + textHeight ){
+      if (go == 1 && menu == 0 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight ){
         menu = 1;
         return;
       }
     
     //keyMenu enter
-     if (go == 1 && menu == 1 && keyMenu == 0 && touch.x > window.innerWidth/2 - window.innerWidth/10 && touch.x < window.innerWidth/2 + window.innerWidth/10 && touch.y > window.innerHeight/2 - window.innerHeight/8 - textHeight && touch.y < window.innerHeight/2 - window.innerHeight/8 + textHeight){
+     if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight/2 - window.innerHeight/8 - textHeight && mouseY < window.innerHeight/2 - window.innerHeight/8 + textHeight){
         menu = 0;
         keyMenu = 1;
         return;
      }
 
     //menu exit to play screen
-    if (go == 1 && menu == 1 && keyMenu == 0 && touch.x > window.innerWidth/2 - window.innerWidth/8 && touch.x < window.innerWidth/2 + window.innerWidth/8 && touch.y > window.innerHeight/2 + window.innerHeight/8 + textHeight/2 && touch.y < window.innerHeight/2 + window.innerHeight/8 + 2*textHeight){
+    if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 + window.innerHeight/8 + textHeight/2 && mouseY < window.innerHeight/2 + window.innerHeight/8 + 2*textHeight){
         menu = 0;
         go = 1;
         keyMenu = 0;
@@ -272,7 +272,7 @@ function touchStarted(){
       
       
       //exit to play screen
-      if(touch.x > window.innerWidth/2 - window.innerWidth/10 && touch.x < window.innerWidth/2 + window.innerWidth/10 && touch.y > window.innerHeight - 2 * window.innerHeight/10 && touch.y < window.innerHeight + 2 * window.innerHeight/10) {
+      if(mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight - 2 * window.innerHeight/10 && mouseY < window.innerHeight + 2 * window.innerHeight/10) {
         keyMenu = 0;
         menu = 0;
         go = 1;
