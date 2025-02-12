@@ -201,7 +201,7 @@ function mousePressed(){
 
     //play screen  && requestButton == 1
       if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-        //startApp(); //starts webPD audio app
+        startApp(); //starts webPD audio app
         checkAppStart();
         console.log('WebPD started supostamente');
         return;
