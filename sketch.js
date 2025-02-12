@@ -37,6 +37,7 @@ let initTouch = 0;
 
 // let iosSensorPermissionRequested = false;
 
+document.addEventListener('touchstart', {});
 
 function preload(){
   font = loadFont('tiny5.ttf');
