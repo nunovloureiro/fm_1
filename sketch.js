@@ -32,7 +32,7 @@ let permissionGranted = false;
 let requestButton = 0;
 let androidStop = 0;
 
-// let iosSensorPermissionRequested = false;
+let iosSensorPermissionRequested = false;
 
 
 function preload(){
@@ -311,11 +311,11 @@ function initKeyboard(){
 
 
 function touchStarted() {
-  // On the very first touch, request iOS motion sensor permission
-  // if (!iosSensorPermissionRequested) {
-  //   iosSensorPermissionRequested = true;
-  //   requestMotionSensorPermission();
-  // }
+  //On the very first touch, request iOS motion sensor permission
+  if (!iosSensorPermissionRequested) {
+    iosSensorPermissionRequested = true;
+    // requestMotionSensorPermission();
+  }
 
   // Continue with your normal touch behavior
   mousePressed();
