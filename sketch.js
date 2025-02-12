@@ -313,12 +313,12 @@ function initKeyboard(){
   }
 
 
-function touchStarted() {
+//function touchStarted() {
 
-    if (initTouch == 0){
-       startApp();
-       initTouch = 1;
-    }
+    // if (initTouch == 0){
+    //    startApp();
+    //    initTouch = 1;
+    // }
   //On the very first touch, request iOS motion sensor permission
   // if (!iosSensorPermissionRequested) {
   //   iosSensorPermissionRequested = true;
@@ -326,8 +326,8 @@ function touchStarted() {
   //}
 
   // Continue with your normal touch behavior
-  mousePressed();
-}
+  //mousePressed();
+//}
 
 
   // function requestMotionSensorPermission() {
