@@ -66,13 +66,23 @@
 
         // Hide loading and show the permissions button
         loadingDiv.style.display = "none";
-        permissionsButton.style.display = "block";
-        startButton.style.display = "none";
+        permissionsButton.style.display = "none";
+        startButton.style.display = "block";
       };
 
       // This function resumes audioContext immediately on user gesture,
       // then requests motion sensor permission.
       const checkPermissions = async () => {
+        
+        // If we reach here, motion permission (if needed) is granted.
+        // Hide the permissions button and show the start button.
+        //permissionsButton.style.display = "none";
+        //startButton.style.display = "none";
+      };
+
+      // startApp can assume the AudioContext is already resumed.
+      const startApp = async () => {
+
         // *** Resume AudioContext synchronously as part of the user gesture ***
         if (audioContext.state === "suspended") {
           try {
@@ -99,14 +109,7 @@
             return;
           }
         }
-        // If we reach here, motion permission (if needed) is granted.
-        // Hide the permissions button and show the start button.
-        permissionsButton.style.display = "none";
-        startButton.style.display = "block";
-      };
 
-      // startApp can assume the AudioContext is already resumed.
-      const startApp = async () => {
         // Setup web audio graph
         webpdNode = await WebPdRuntime.run(
           audioContext,
@@ -123,7 +126,7 @@
         startButton.style.display = "none";
       };
 
-      permissionsButton.onclick = checkPermissions;
+    //   permissionsButton.onclick = checkPermissions;
       startButton.onclick = startApp;
 
       initApp().then(() => {
