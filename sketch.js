@@ -160,11 +160,11 @@ function gui(){
         console.log(webpdNode);
         //console.log(webpdNode.engine);
 
-        if (webpdNode){
+        // if (webpdNode){
         console.log('Msg2PD check')
-        sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
-        sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
-        }
+        sendMsgToWebPd("n_0_9", "0", [rx]); 
+        sendMsgToWebPd("n_0_10", "0", [rz]);
+    // }
     }
     
     //menu screen
