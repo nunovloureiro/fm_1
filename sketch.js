@@ -34,8 +34,6 @@ let androidStop = 0;
 
 let iosSensorPermissionRequested = false;
 
-//document.addEventListener('touchstart', {});
-
 
 function preload(){
   font = loadFont('tiny5.ttf');
@@ -192,61 +190,11 @@ function gui(){
   
 function mousePressed(){
 
-    //   //request
-    // if (requestButton == 0 && go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-    //   if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
-    //     //iOS device
-    //     DeviceOrientationEvent.requestPermission()
-    //       .catch(() => {
-    //         //show permission dialogue on the first time
-    //         requestSensorPermissions();
-    //         requestButton = 1;
-    //       })
-    //       .then(() => {
-    //         //subsequent visits. permission already granted
-    //         permissionGranted = true;
-    //         requestButton = 1;
-    //       })
-          
-    //     }
-    //   } else {
-    //     requestButton = 1;
-    //     androidStop = 1;
-    //     go = 1;
-    //     startApp();
-    //     //return;
-    //   }
-
-
-
-       //request
-      //  if (requestButton == 0 && go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-      //   if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
-      //     //iOS device
-      //     DeviceOrientationEvent.requestPermission()
-      //       .catch(() => {
-      //         //show permission dialogue on the first time
-      //         requestSensorPermissions();
-      //         requestButton = 1;
-      //       })
-      //       .then(() => {
-      //         //subsequent visits. permission already granted
-      //         permissionGranted = true;
-      //         requestButton = 1;
-      //       })
-      //   } else {
-      //     requestButton = 1;
-      //   }
-      //   // androidStop = 1;
-      //   go = 1;
-      //   startApp();
-      //   return;
-      // }
-
     //play screen  && requestButton == 1
-      if (go == 0 && androidStop == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+      if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
         go = 1
         startApp(); //starts webPD audio app
+        console.log('WebPD started supostamente');
         return;
       }
     
@@ -406,68 +354,3 @@ function touchStarted() {
   }
 
   
-
-
-  // function touchStarted() {
-
-  //   if (requestButton == 0){
-  //     if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
-  //       //iOS device
-  //       DeviceOrientationEvent.requestPermission()
-  //         .catch(() => {
-  //           //show permission dialogue on the first time
-  //           requestSensorPermissions();
-  //           requestButton = 1;
-  //         })
-  //         .then(() => {
-  //           //subsequent visits. permission already granted
-  //           permissionGranted = true;
-  //           requestButton = 1;
-  //         })
-  //     } else {
-  //       requestButton = 1;
-  //     }
-  //   }
-  //   mousePressed(); // Calls the same logic for touch
-  // }
-
-
-  // function requestSensorPermissions() {
-  //   // Set up default promises that resolve to "granted" for browsers that don't need permission.
-  //   let motionPromise = Promise.resolve('granted');
-  //   let orientationPromise = Promise.resolve('granted');
-  
-  //   // Check and request permission for Device Motion (if needed)
-  //   if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-  //     motionPromise = DeviceMotionEvent.requestPermission();
-  //   }
-  
-  //   // Check and request permission for Device Orientation (if needed)
-  //   if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-  //     orientationPromise = DeviceOrientationEvent.requestPermission();
-  //   }
-  
-  //   // Request both permissions concurrently
-  //   Promise.all([motionPromise, orientationPromise])
-  //     .then(([motionPermission, orientationPermission]) => {
-  //       if (motionPermission === 'granted' && orientationPermission === 'granted') {
-  //         console.log("Both sensor permissions granted.");
-  
-  //         // Add event listeners for motion and orientation data.
-  //         window.addEventListener('devicemotion', (event) => {
-  //           console.log('Motion Data:', event);
-  //           // You can use event.acceleration, event.rotationRate, etc.
-  //         });
-  
-  //         window.addEventListener('deviceorientation', (event) => {
-  //           console.log('Orientation Data:', event);
-  //           // Use event.alpha, event.beta, and event.gamma as needed.
-  //         });
-  //       } else {
-  //         console.error("Permission for one or both sensors was not granted.");
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error("Error requesting sensor permissions:", error);
-  //     });
-  // }

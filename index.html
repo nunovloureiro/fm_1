@@ -77,7 +77,7 @@
                 await WebPdRuntime.initialize(audioContext)
 
                 // Fetch the patch code
-                response = await fetch('patch.wasm')
+                const response = await fetch('patch.wasm')
                 patch = await response.arrayBuffer()
 
                 // Comment this if you don't need audio input
