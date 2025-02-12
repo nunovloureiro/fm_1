@@ -81,10 +81,10 @@
                         './patch.wasm',
                         // Comment this if you don't need to receive messages from the patch
                         receiveMsgFromWebPd,
-                    ),
-                    console.log(webpdNode);
-                    console.log(webpdNode.engine);
-                )
+                    ))
+                console.log(webpdNode)
+                console.log(webpdNode.engine)
+                
                 webpdNode.connect(audioContext.destination)
 
                 // Comment this if you don't need audio input
