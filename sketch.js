@@ -136,7 +136,7 @@ function gui(){
   
     //startup screen
     if (go == 0 && menu == 0 && keyMenu == 0){
-      background(50);
+      background(0);
       fill(0,0,255);
       rectMode(CENTER);
       rect(window.innerWidth/2, window.innerHeight/2, TWstartText + window.innerWidth/70, window.innerWidth/5);
@@ -147,7 +147,7 @@ function gui(){
       
     } 
     // play screen
-    if (go === 1 && menu === 0 && keyMenu === 0 && webpdNode && webpdNode.engine){
+    if (go == 1 && menu == 0 && keyMenu == 0){
         background(0);
         fill(0,0,255);
         rectMode(CENTER);
@@ -157,9 +157,10 @@ function gui(){
         textSize(window.innerWidth/5);
         text('+', window.innerWidth/2, window.innerHeight/2);
 
+        if (webpdNode && webpdNode.engine){
         sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
         sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
-
+        }
     }
     
     //menu screen
