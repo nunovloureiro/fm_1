@@ -157,7 +157,11 @@ function gui(){
         textSize(window.innerWidth/5);
         text('+', window.innerWidth/2, window.innerHeight/2);
 
+        console.log(webpdNode);
+        console.log(webpdNode.engine);
+
         if (webpdNode && webpdNode.engine){
+        console.log('Msg2PD check')
         sendMsgToWebPd("n_0_9", "0", [rx]); ///////RX parece ser o ID 17
         sendMsgToWebPd("n_0_10", "0", [rz]); ///////RZ parece ser o ID 18
         }
