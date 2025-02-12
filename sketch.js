@@ -32,55 +32,10 @@ let permissionGranted = false;
 let requestButton = 0;
 let androidStop = 0;
 
+let iosSensorPermissionRequested = false;
+
 //document.addEventListener('touchstart', {});
 
-// iOS Motion Sensor Permission Function
-function initIOSMotionSensors() {
-  // Check if the device is running iOS
-  const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  if (!isiOS) {
-    console.log("This is not an iOS device. No permission request needed.");
-    return;
-  }
-
-  // Handler for the first touch event
-  const handleFirstTouch = () => {
-    // Remove the listener so it only runs once
-    window.removeEventListener("touchstart", handleFirstTouch, false);
-
-    // Check if the API is available (iOS 13+ requires a permission request)
-    if (typeof DeviceMotionEvent !== "undefined" &&
-        typeof DeviceMotionEvent.requestPermission === "function") {
-      DeviceMotionEvent.requestPermission()
-        .then(response => {
-          if (response === "granted") {
-            console.log("Motion sensor permission granted!");
-            // Attach the event listener for motion events
-            window.addEventListener("devicemotion", (event) => {
-              // You can process the sensor data here
-              console.log("Acceleration:", event.acceleration);
-              console.log("Acceleration including gravity:", event.accelerationIncludingGravity);
-              console.log("Rotation rate:", event.rotationRate);
-            });
-          } else {
-            console.error("Motion sensor permission denied.");
-          }
-        })
-        .catch(error => {
-          console.error("Error requesting motion sensor permission:", error);
-        });
-    } else {
-      // For browsers/devices that do not need a permission prompt
-      console.log("DeviceMotionEvent.requestPermission is not available.");
-      window.addEventListener("devicemotion", (event) => {
-        console.log("Motion event:", event);
-      });
-    }
-  };
-
-  // Listen for the first touch to trigger the permission request
-  window.addEventListener("touchstart", handleFirstTouch, false);
-}
 
 function preload(){
   font = loadFont('tiny5.ttf');
@@ -93,11 +48,7 @@ function setup() {
     angleMode(RADIANS);
     rectMode(CENTER);
 
-    // Initialize iOS motion sensors (this will attach the touch listener)
-    initIOSMotionSensors();
-
     checkAppStart();
-
 
     textFont(font);
     textSize(window.innerWidth/5);
@@ -187,7 +138,7 @@ function gui(){
   
     //startup screen
     if (go == 0 && menu == 0 && keyMenu == 0){
-      background(0);
+      background(50);
       fill(255,255,255);
       rectMode(CENTER);
       rect(window.innerWidth/2, window.innerHeight/2, TWstartText + window.innerWidth/70, window.innerWidth/5);
@@ -199,7 +150,7 @@ function gui(){
     } 
     // play screen
     if (go == 1 && menu == 0 && keyMenu == 0){
-        background(0);
+        background(50);
         fill(255,255,255);
         rectMode(CENTER);
         rect(window.innerWidth/2, window.innerHeight/2, window.innerWidth/5, window.innerWidth/5);
@@ -403,6 +354,59 @@ function initKeyboard(){
        }
     }
   }
+
+
+function touchStarted() {
+  // On the very first touch, request iOS motion sensor permission
+  if (!iosSensorPermissionRequested) {
+    iosSensorPermissionRequested = true;
+    requestMotionSensorPermission();
+  }
+  // Continue with your normal touch behavior
+  mousePressed();
+}
+
+
+  function requestMotionSensorPermission() {
+    // Check if the device is running iOS
+    const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    if (!isiOS) {
+      console.log("Not an iOS device. No sensor permission needed.");
+      return;
+    }
+    
+    // For iOS 13+ where permission is required
+    if (typeof DeviceMotionEvent !== "undefined" &&
+        typeof DeviceMotionEvent.requestPermission === "function") {
+      DeviceMotionEvent.requestPermission()
+        .then(response => {
+          if (response === "granted") {
+            console.log("Motion sensor permission granted!");
+            // Attach a listener if you want to process sensor data
+            window.addEventListener("devicemotion", (event) => {
+              // Process sensor data here if needed
+              console.log("Acceleration:", event.acceleration);
+              console.log("Acceleration including gravity:", event.accelerationIncludingGravity);
+              console.log("Rotation rate:", event.rotationRate);
+            });
+          } else {
+            console.error("Motion sensor permission denied.");
+          }
+        })
+        .catch(error => {
+          console.error("Error requesting motion sensor permission:", error);
+        });
+    } else {
+      // Fallback for devices or browsers that don't require a permission prompt
+      console.log("DeviceMotionEvent.requestPermission is not available.");
+      window.addEventListener("devicemotion", (event) => {
+        console.log("Motion event:", event);
+      });
+    }
+  }
+
+  
+
 
   // function touchStarted() {
 
