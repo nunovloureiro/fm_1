@@ -97,10 +97,12 @@ function draw() {
 }
 
 function checkAppStart() {
+  console.log("enter checkAppStart function");
     if (window.appStarted && go == 0) {
         console.log("App started, initializing sketch.js features.");
         go = 1;
         } else {
+        console.log("checkAppStart else function")
         setTimeout(checkAppStart, 100); // Check again in 100ms
     }
 }
@@ -157,11 +159,10 @@ function gui(){
         textSize(window.innerWidth/5);
         text('+', window.innerWidth/2, window.innerHeight/2);
 
-        console.log(webpdNode);
+        //console.log(webpdNode);
         //console.log(webpdNode.engine);
 
         // if (webpdNode){
-        console.log('Msg2PD check')
         sendMsgToWebPd("n_0_9", "0", [rx]); 
         sendMsgToWebPd("n_0_10", "0", [rz]);
     // }
