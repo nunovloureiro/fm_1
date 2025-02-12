@@ -34,6 +34,54 @@ let androidStop = 0;
 
 //document.addEventListener('touchstart', {});
 
+// iOS Motion Sensor Permission Function
+function initIOSMotionSensors() {
+  // Check if the device is running iOS
+  const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  if (!isiOS) {
+    console.log("This is not an iOS device. No permission request needed.");
+    return;
+  }
+
+  // Handler for the first touch event
+  const handleFirstTouch = () => {
+    // Remove the listener so it only runs once
+    window.removeEventListener("touchstart", handleFirstTouch, false);
+
+    // Check if the API is available (iOS 13+ requires a permission request)
+    if (typeof DeviceMotionEvent !== "undefined" &&
+        typeof DeviceMotionEvent.requestPermission === "function") {
+      DeviceMotionEvent.requestPermission()
+        .then(response => {
+          if (response === "granted") {
+            console.log("Motion sensor permission granted!");
+            // Attach the event listener for motion events
+            window.addEventListener("devicemotion", (event) => {
+              // You can process the sensor data here
+              console.log("Acceleration:", event.acceleration);
+              console.log("Acceleration including gravity:", event.accelerationIncludingGravity);
+              console.log("Rotation rate:", event.rotationRate);
+            });
+          } else {
+            console.error("Motion sensor permission denied.");
+          }
+        })
+        .catch(error => {
+          console.error("Error requesting motion sensor permission:", error);
+        });
+    } else {
+      // For browsers/devices that do not need a permission prompt
+      console.log("DeviceMotionEvent.requestPermission is not available.");
+      window.addEventListener("devicemotion", (event) => {
+        console.log("Motion event:", event);
+      });
+    }
+  };
+
+  // Listen for the first touch to trigger the permission request
+  window.addEventListener("touchstart", handleFirstTouch, false);
+}
+
 function preload(){
   font = loadFont('tiny5.ttf');
 }
@@ -44,6 +92,9 @@ function setup() {
     frameRate(15);
     angleMode(RADIANS);
     rectMode(CENTER);
+
+    // Initialize iOS motion sensors (this will attach the touch listener)
+    initIOSMotionSensors();
 
     checkAppStart();
 
