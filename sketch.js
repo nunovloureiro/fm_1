@@ -242,7 +242,7 @@ function mousePressed(){
           // androidStop = 1;
           go = 1;
           startApp();
-          //return;
+          return;
         }
       }
     
