@@ -32,7 +32,7 @@ let permissionGranted = false;
 let requestButton = 0;
 let androidStop = 0;
 
-let iosSensorPermissionRequested = false;
+// let iosSensorPermissionRequested = false;
 
 
 function preload(){
