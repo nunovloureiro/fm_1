@@ -7,6 +7,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>WebPd boilerplate</title>
         <style>
+            #permissions {
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
             #start {
                 display: none;
                 position: fixed;
@@ -29,6 +36,7 @@
     <body>
         <h1>My Web Page</h1>
         <div>For more info about usage (how to interact with the patch), you can open this HTML file in a code editor.</div>
+        <button id="permissions"> iOS? </button>
         <button id="start"> Start </button>
         <div id="loading"> Loading ... </div>
         <script src="webpd-runtime.js"></script>
@@ -41,6 +49,7 @@
 
             // ------------- 1. WEB PAGE INITIALIZATION
             const loadingDiv = document.querySelector('#loading')
+            const permissionsButton = document.querySelector('#permissions')
             const startButton = document.querySelector('#start')
             const audioContext = new AudioContext()
 
@@ -49,6 +58,7 @@
             let webpdNode = null
 
             const initApp = async () => {
+
                 // Register the worklet
                 await WebPdRuntime.initialize(audioContext)
 
@@ -59,22 +69,16 @@
                 // Comment this if you don't need audio input
                 //stream = await navigator.mediaDevices.getUserMedia({ audio: true })
 
+
                 // Hide loading and show start button
                 loadingDiv.style.display = 'none'
-                startButton.style.display = 'block'
+                permissionsButton.style.display = 'block'
+                startButton.style.display = 'none'
             }
 
-            const startApp = async () => {
-
-                // AudioContext needs to be resumed on click to protects users 
-                // from being spammed with autoplay.
-                // See : https://github.com/WebAudio/web-audio-api/issues/345
-                if (audioContext.state === 'suspended') {
-                    audioContext.resume()
-                }
-
-                                // Check if permission is needed for motion sensors
-                                if (typeof DeviceMotionEvent !== "undefined" && typeof DeviceMotionEvent.requestPermission === "function") {
+            const checkPermissions = async () => {
+                // Check if permission is needed for motion sensors
+                if (typeof DeviceMotionEvent !== "undefined" && typeof DeviceMotionEvent.requestPermission === "function") {
                     try {
                         const permissionState = await DeviceMotionEvent.requestPermission();
                         if (permissionState !== "granted") {
@@ -85,6 +89,18 @@
                     console.error("Error requesting motion permission:", error);
                      return;
                      }
+                }
+                startButton.style.display = 'block'
+            }
+
+
+            const startApp = async () => {
+
+                // AudioContext needs to be resumed on click to protects users 
+                // from being spammed with autoplay.
+                // See : https://github.com/WebAudio/web-audio-api/issues/345
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume()
                 }
 
                 // Setup web audio graph
@@ -107,6 +123,7 @@
                 startButton.style.display = 'none'
             }
 
+            permissionsButton.onclick = checkPermissions
             startButton.onclick = startApp
 
             initApp().
