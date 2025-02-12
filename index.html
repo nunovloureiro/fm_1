@@ -57,7 +57,7 @@
                 patch = await response.arrayBuffer()
 
                 // Comment this if you don't need audio input
-                stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+                //stream = await navigator.mediaDevices.getUserMedia({ audio: true })
 
                 // Hide loading and show start button
                 loadingDiv.style.display = 'none'
@@ -65,6 +65,26 @@
             }
 
             const startApp = async () => {
+                // Check if permission is needed for motion sensors
+                 if (typeof DeviceMotionEvent !== "undefined" && typeof DeviceMotionEvent.requestPermission === "function") {
+                    try {
+                        const permissionState = await DeviceMotionEvent.requestPermission();
+                        if (permissionState !== "granted") {
+                             alert("Motion sensor permission denied. Some features may not work.");
+                             return;
+                        }
+                    } catch (error) {
+                    console.error("Error requesting motion permission:", error);
+                     return;
+                     }
+                }
+
+
+
+
+
+
+
                 // AudioContext needs to be resumed on click to protects users 
                 // from being spammed with autoplay.
                 // See : https://github.com/WebAudio/web-audio-api/issues/345
@@ -85,8 +105,8 @@
                 webpdNode.connect(audioContext.destination)
 
                 // Comment this if you don't need audio input
-                const sourceNode = audioContext.createMediaStreamSource(stream)
-                sourceNode.connect(webpdNode)
+                //const sourceNode = audioContext.createMediaStreamSource(stream)
+                //sourceNode.connect(webpdNode)
 
                 // Hide the start button
                 startButton.style.display = 'none'
