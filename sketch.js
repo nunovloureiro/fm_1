@@ -190,39 +190,61 @@ function gui(){
   
 function mousePressed(){
 
-      //request
-    if (requestButton == 0 && go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-      if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
-        //iOS device
-        DeviceOrientationEvent.requestPermission()
-          .catch(() => {
-            //show permission dialogue on the first time
-            requestSensorPermissions();
-            requestButton = 1;
-          })
-          .then(() => {
-            //subsequent visits. permission already granted
-            permissionGranted = true;
-            requestButton = 1;
-          })
+    //   //request
+    // if (requestButton == 0 && go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+    //   if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
+    //     //iOS device
+    //     DeviceOrientationEvent.requestPermission()
+    //       .catch(() => {
+    //         //show permission dialogue on the first time
+    //         requestSensorPermissions();
+    //         requestButton = 1;
+    //       })
+    //       .then(() => {
+    //         //subsequent visits. permission already granted
+    //         permissionGranted = true;
+    //         requestButton = 1;
+    //       })
           
-        }
-      } else {
-        requestButton = 1;
-        androidStop = 1;
-        go = 1;
-        startApp();
-        //return;
-      }
+    //     }
+    //   } else {
+    //     requestButton = 1;
+    //     androidStop = 1;
+    //     go = 1;
+    //     startApp();
+    //     //return;
+    //   }
 
-      //play screen  && requestButton == 1
-      if (go == 0 && requestButton == 1 && androidStop == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-        go = 1
-          startApp(); //starts webPD audio app
-          return;
+    //   //play screen  && requestButton == 1
+    //   if (go == 0 && requestButton == 1 && androidStop == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+    //     go = 1
+    //       startApp(); //starts webPD audio app
+    //       return;
+    //     }
+
+       //request
+       if (requestButton == 0 && go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+        if (typeof(DeviceOrientationEvent) != 'undefined' && typeof(DeviceOrientationEvent.requestPermission) === 'function'){
+          //iOS device
+          DeviceOrientationEvent.requestPermission()
+            .catch(() => {
+              //show permission dialogue on the first time
+              requestSensorPermissions();
+              requestButton = 1;
+            })
+            .then(() => {
+              //subsequent visits. permission already granted
+              permissionGranted = true;
+              requestButton = 1;
+            })
+        } else {
+          requestButton = 1;
+          // androidStop = 1;
+          go = 1;
+          startApp();
+          //return;
         }
-       
-    
+      }
     
     //menu enter
       if (go == 1 && menu == 0 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight ){
