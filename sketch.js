@@ -43,7 +43,7 @@ document.addEventListener('touchstart', handleTouchStart);
 function handleTouchStart(event) {
   // Your code here to handle the touch start event
   console.log('Touch started!', event);
-  requestMotionSensorPermission();
+  isiOSdevice();
 }
 
 function preload(){
@@ -338,7 +338,7 @@ function initKeyboard(){
 //}
 
 
-  function requestMotionSensorPermission() {
+  function isiOSdevice(){
     // Check if the device is running iOS
     const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     if (!isiOS) {
@@ -348,6 +348,11 @@ function initKeyboard(){
     else {
       console.log("iOS device. Sensor permission needed.");
     }
+  }
+
+
+  function requestMotionSensorPermission() {
+    
     
     // For iOS 13+ where permission is required
     if (typeof DeviceMotionEvent !== "undefined" &&
