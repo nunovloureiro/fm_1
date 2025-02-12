@@ -37,7 +37,12 @@ let initTouch = 0;
 
 // let iosSensorPermissionRequested = false;
 
-document.addEventListener('touchstart', {});
+document.addEventListener('touchstart', handleTouchStart);
+
+function handleTouchStart(event) {
+  // Your code here to handle the touch start event
+  console.log('Touch started!', event);
+}
 
 function preload(){
   font = loadFont('tiny5.ttf');
