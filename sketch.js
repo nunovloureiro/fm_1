@@ -100,10 +100,8 @@ function checkAppStart() {
         console.log("App started, initializing sketch.js features.");
         go = 1;
         console.log("go", go);
-        startApp(); //starts webPD audio app
-        console.log('WebPD started supostamente');
         } else {
-        console.log("checkAppStart else function")
+        console.log("checkAppStart nopeeeee")
         setTimeout(checkAppStart, 100); // Check again in 100ms
     }
 }
@@ -199,7 +197,9 @@ function mousePressed(){
 
     //play screen  && requestButton == 1
       if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+        startApp(); //starts webPD audio app
         checkAppStart();
+        console.log('WebPD started supostamente');
         return;
       }
     
