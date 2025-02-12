@@ -96,7 +96,7 @@ function draw() {
 
 function checkAppStart() {
   console.log("enter checkAppStart function");
-    if (window.appStarted && go == 0) {
+    if (window.appStarted) {
         console.log("App started, initializing sketch.js features.");
         go = 1;
         } else {
@@ -196,7 +196,6 @@ function mousePressed(){
 
     //play screen  && requestButton == 1
       if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-        go = 1;
         checkAppStart();
         startApp(); //starts webPD audio app
         console.log('WebPD started supostamente');
