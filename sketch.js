@@ -32,6 +32,9 @@ let permissionGranted = false;
 let requestButton = 0;
 let androidStop = 0;
 
+
+let initTouch = 0;
+
 // let iosSensorPermissionRequested = false;
 
 
@@ -50,6 +53,7 @@ function setup() {
     textSize(window.innerWidth/5);
     textAlign(CENTER,CENTER);
     textHeight = window.innerWidth/10;
+
   
     //keyboard size according to display size
     scallingAndOrientation();
@@ -197,7 +201,7 @@ function mousePressed(){
 
     //play screen  && requestButton == 1
       if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-        startApp(); //starts webPD audio app
+        //startApp(); //starts webPD audio app
         checkAppStart();
         console.log('WebPD started supostamente');
         return;
@@ -310,6 +314,11 @@ function initKeyboard(){
 
 
 function touchStarted() {
+
+    if (initTouch == 0){
+       startApp();
+       initTouch = 1;
+    }
   //On the very first touch, request iOS motion sensor permission
   // if (!iosSensorPermissionRequested) {
   //   iosSensorPermissionRequested = true;
