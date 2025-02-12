@@ -33,7 +33,7 @@ let requestButton = 0;
 let androidStop = 0;
 
 
-let inittouch. = 0;
+let initTouch = 0;
 
 // let iosSensorPermissionRequested = false;
 
