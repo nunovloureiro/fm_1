@@ -65,8 +65,16 @@
             }
 
             const startApp = async () => {
-                // Check if permission is needed for motion sensors
-                 if (typeof DeviceMotionEvent !== "undefined" && typeof DeviceMotionEvent.requestPermission === "function") {
+
+                // AudioContext needs to be resumed on click to protects users 
+                // from being spammed with autoplay.
+                // See : https://github.com/WebAudio/web-audio-api/issues/345
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume()
+                }
+
+                                // Check if permission is needed for motion sensors
+                                if (typeof DeviceMotionEvent !== "undefined" && typeof DeviceMotionEvent.requestPermission === "function") {
                     try {
                         const permissionState = await DeviceMotionEvent.requestPermission();
                         if (permissionState !== "granted") {
@@ -77,19 +85,6 @@
                     console.error("Error requesting motion permission:", error);
                      return;
                      }
-                }
-
-
-
-
-
-
-
-                // AudioContext needs to be resumed on click to protects users 
-                // from being spammed with autoplay.
-                // See : https://github.com/WebAudio/web-audio-api/issues/345
-                if (audioContext.state === 'suspended') {
-                    audioContext.resume()
                 }
 
                 // Setup web audio graph
