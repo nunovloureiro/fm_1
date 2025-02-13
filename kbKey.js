@@ -12,18 +12,18 @@ class kbKey {
     }
     
     show() {  
-      strokeWeight(this.keySW);
-      stroke(0);
-      fill(0,0,this.selected);
-      square(this.x, this.y,  this.keySize);
+      p.strokeWeight(this.keySW);
+      p.stroke(0);
+      p.fill(0,0,this.selected);
+      p.square(this.x, this.y,  this.keySize);
     }
     
     
     isClicked(){
       let offsetY = this.w_b === 1 ? this.keySize * 0.3 : 0; // Slightly shift detection for black keys
-      return (mouseX > this.x - this.keySize / 2 &&
-              mouseX < this.x + this.keySize / 2 &&
-              mouseY > this.y - this.keySize / 2 &&
-              mouseY < this.y + this.keySize / 2);
+      return (p.mouseX > this.x - this.keySize / 2 &&
+        p.mouseX < this.x + this.keySize / 2 &&
+        p.mouseY > this.y - this.keySize / 2 &&
+        p.mouseY < this.y + this.keySize / 2);
     }
   }
