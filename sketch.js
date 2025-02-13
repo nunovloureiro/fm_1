@@ -1,3 +1,8 @@
+document.addEventListener('touchstart', handleTouchStart);
+
+let mySketch = function(p) {
+
+
 let mx;
 let my;
 let rx = 0;
@@ -46,74 +51,74 @@ let tendY;
 
 // let iosSensorPermissionRequested = false;
 
-document.addEventListener('touchstart', handleTouchStart);
 
-function handleTouchStart(event) {
+
+p.handleTouchStart = function(event) {
   // Your code here to handle the touch start event
   console.log('Touch started!', event);
 }
 
-function preload(){
+p.preload = function(){
   font = loadFont('tiny5.ttf');
 }
 
-function setup() {
+p.setup = function() {
 
     console.log("sketch enter setup");
-    createCanvas(window.innerWidth, window.innerHeight);
-    frameRate(15);
-    angleMode(RADIANS);
-    rectMode(CENTER);
+    p.createCanvas(p.window.innerWidth,p.window.innerHeight);
+    p.frameRate(15);
+    p.angleMode(p.RADIANS);
+    p.rectMode(p.CENTER);
 
-    background(0);
+    p.background(0);
 
-    textFont(font);
-    textSize(window.innerWidth/5);
-    textAlign(CENTER,CENTER);
-    textHeight = window.innerWidth/10;
+    p.textFont(font);
+    p.textSize(p.window.innerWidth/5);
+    p.textAlign(CENTER,CENTER);
+    textHeight = p.window.innerWidth/10;
 
   
     //keyboard size according to display size
-    scallingAndOrientation();
+    p.scallingAndOrientation();
 
-    initKeyboard();
+    p.initKeyboard();
     hitKey = teclasBrancas[0];
     hitKey.selected = 0; // Highlight the selected key
   
-     TWstartText = textWidth('start');
-     TWmenuText = textWidth('+');  
+     TWstartText = p.textWidth('start');
+     TWmenuText = p.textWidth('+');  
 }
 
-function draw() {
+p.draw = function() {
 
-    gui();
+    p.gui();
 
-    rx = rotationX / PI;
-    ry = rotationY / PI;
-    rz = rotationZ / PI;
-    rotationValueLimiter();
+    rx = p.rotationX / p.PI;
+    ry = p.rotationY / p.PI;
+    rz = p.rotationZ / p.PI;
+    p.rotationValueLimiter();
 
-    fill(255, 0, 0);
-    rect(window.innerWidth / 4, window.innerHeight / 2, 5, 0 + rx * 100);
+    p.fill(255, 0, 0);
+    p.rect(p.window.innerWidth / 4, p.window.innerHeight / 2, 5, 0 + rx * 100);
 
     // fill(0, 255, 0);
     // rect(window.innerWidth / 2, window.innerHeight / 2, 5, 0 + ry * 100);
 
-    fill(0, 0, 255);
-    rect(window.innerWidth - window.innerWidth / 4, window.innerHeight / 2, 5, 0 + rz * 100);
+    p.fill(0, 0, 255);
+    p.rect(p.window.innerWidth - p.window.innerWidth / 4, p.window.innerHeight / 2, 5, 0 + rz * 100);
 
-    mx = map(mouseX, 0, window.innerWidth, 0, 1);
-    my = map(mouseY, 0, window.innerWidth, 0, 6);
+    mx = p.map(p.mouseX, 0, p.window.innerWidth, 0, 1);
+    my = p.map(p.mouseY, 0, p.window.innerWidth, 0, 6);
 
-    fill(0,0,255);
-    textAlign(LEFT);
-    textSize(20);
-    text('cell.osc ++', 20, 40);
-    text('rx= ' + rx, 20, 80);
-    text('ry= ' + ry, 20, 100);
-    text('rz= ' + rz, 20, 120);
-    text('mx= ' + mx, 20, 140);
-    text('my= ' + my, 20, 160);
+    p.fill(0,0,255);
+    p.textAlign(p.LEFT);
+    p.textSize(20);
+    p.text('cell.osc ++', 20, 40);
+    p.text('rx= ' + rx, 20, 80);
+    p.text('ry= ' + ry, 20, 100);
+    p.text('rz= ' + rz, 20, 120);
+    p.text('mx= ' + mx, 20, 140);
+    p.text('my= ' + my, 20, 160);
 }
 
 // function checkAppStart() {
@@ -128,57 +133,57 @@ function draw() {
 //     }
 // }
 
-function rotationValueLimiter() {
-    rx = max(rx, 0);
-    ry = max(ry, 0);
-    rz = max(rz, 0);
+p.rotationValueLimiter = function() {
+    rx = p.max(rx, 0);
+    ry = p.max(ry, 0);
+    rz = p.max(rz, 0);
 }
 
-function scallingAndOrientation(){
-    if (window.innerWidth <= window.innerHeight){
-        keySize = window.innerHeight/20;
-        keyboardSW = keySize/6;
-        wkeyVertOfset = window.innerHeight/8;
-        bkeyVertOfset = window.innerHeight/6;
-        keyVertDist = 1.4 * keySize;
-        wkPos = window.innerWidth/2 - keySize/1.5;
-        bkPos = window.innerWidth/2 + keySize/1.5;
+p.scallingAndOrientation = function(){
+    if (p.window.innerWidth <= p.window.innerHeight){
+        keySize = p.window.innerHeight/20;
+        keyboardSW = p.keySize/6;
+        wkeyVertOfset = p.window.innerHeight/8;
+        bkeyVertOfset = p.window.innerHeight/6;
+        keyVertDist = 1.4 * p.keySize;
+        wkPos = p.window.innerWidth/2 - keySize/1.5;
+        bkPos = p.window.innerWidth/2 + keySize/1.5;
       } else {
-        keySize = window.innerHeight/16;
+        keySize = p.window.innerHeight/16;
         keyboardSW = keySize/6;
-        wkeyVertOfset = window.innerHeight/8;
-        bkeyVertOfset = window.innerHeight/6;
+        wkeyVertOfset = p.window.innerHeight/8;
+        bkeyVertOfset = p.window.innerHeight/6;
         keyVertDist = 1.4 * keySize;
-        wkPos = window.innerWidth/2 - keySize/1.5;
-        bkPos = window.innerWidth/2 + keySize/1.5;
+        wkPos = p.window.innerWidth/2 - keySize/1.5;
+        bkPos = p.window.innerWidth/2 + keySize/1.5;
       }
 }
 
 //different menu stages. defines text+position
-function gui(){
+p.gui = function(){
   
     //startup screen
     if (go == 0 && menu == 0 && keyMenu == 0){
-      background(0);
-      fill(0,0,255);
-      rectMode(CENTER);
-      rect(window.innerWidth/2, window.innerHeight/2, TWstartText + window.innerWidth/70, window.innerWidth/5);
-      fill(0);
-      textAlign(CENTER,CENTER);
-      textSize(window.innerWidth/5);
-      text('start', window.innerWidth/2, window.innerHeight/2)
+      p.background(0);
+      p.fill(0,0,255);
+      p.rectMode(p.CENTER);
+      p.rect(p.window.innerWidth/2, p.window.innerHeight/2, TWstartText + p.window.innerWidth/70, p.window.innerWidth/5);
+      p.fill(0);
+      p.textAlign(p.CENTER,p.CENTER);
+      p.textSize(p.window.innerWidth/5);
+      p.text('start', p.window.innerWidth/2, p.window.innerHeight/2)
       
     } 
     // play screen
     if (go == 1 && menu == 0 && keyMenu == 0){
-        background(0);
-        fill(0,0,255);
-        rectMode(CENTER);
-        rect(window.innerWidth/2, window.innerHeight/2, window.innerWidth/5, window.innerWidth/5);
-        fill(0);
-        textAlign(CENTER,CENTER);
-        textSize(window.innerWidth/5);
-        text('+', window.innerWidth/2, window.innerHeight/2);
+      p.background(0);
+      p.fill(0,0,255);
+      p.rectMode(p.CENTER);
+      p.rect(p.window.innerWidth/2, p.window.innerHeight/2, p.window.innerWidth/5, p.window.innerWidth/5);
+      p.fill(0);
+      p.textAlign(p.CENTER,p.CENTER);
+      p.textSize(p.window.innerWidth/5);
+      p.text('+', p.window.innerWidth/2, p.window.innerHeight/2);
 
         //console.log(webpdNode);
         //console.log(webpdNode.engine);
@@ -191,31 +196,31 @@ function gui(){
     
     //menu screen
     if (go == 1 && menu == 1 && keyMenu == 0){
-      background(0,0,255);
-      fill(0);
-      textSize(window.innerWidth/5);
-      textAlign(CENTER, CENTER);
-      text('key', window.innerWidth/2, window.innerHeight/2 - window.innerHeight/8 - textHeight);
-      text('scale', window.innerWidth/2, window.innerHeight/2);
-      textSize(window.innerWidth/5);
-      text('x', window.innerWidth/2, window.innerHeight/2 + window.innerHeight/8 + textHeight);
+      p.background(0,0,255);
+      p.fill(0);
+      p.textSize(p.window.innerWidth/5);
+      p.textAlign(p.CENTER, p.CENTER);
+      p.text('key', p.window.innerWidth/2, p.window.innerHeight/2 - p.window.innerHeight/8 - textHeight);
+      p.text('scale', p.window.innerWidth/2, p.window.innerHeight/2);
+      p.textSize(p.window.innerWidth/5);
+      p.text('x', p.window.innerWidth/2, p.window.innerHeight/2 + p.window.innerHeight/8 + textHeight);
     }
     
     //key menu
     if (go == 1 && menu == 0 && keyMenu == 1){
-      background(0,0,255);
-      showKeyboard();
+      p.background(0,0,255);
+      p.showKeyboard();
       
-      noStroke();
-      fill(0);
-      textSize(window.innerWidth/5);
-      textAlign(CENTER, CENTER);
-      text('x', window.innerWidth/2, window.innerHeight - window.innerHeight/10);
+      p.noStroke();
+      p.fill(0);
+      p.textSize(p.window.innerWidth/5);
+      p.textAlign(p.CENTER, p.CENTER);
+      p.text('x', p.window.innerWidth/2, p.window.innerHeight - p.window.innerHeight/10);
     }
     
   }
   
-function mousePressed(){
+mousePressed = function (){
 
     //play screen  && requestButton == 1
       // if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
@@ -238,20 +243,20 @@ function mousePressed(){
       // }
     
     //menu enter
-      if (go == 1 && menu == 0 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight ){
+      if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.window.innerWidth/2 - p.window.innerWidth/10 && p.mouseX < p.window.innerWidth/2 + p.window.innerWidth/10 && p.mouseY > p.window.innerHeight/2 - textHeight && p.mouseY < p.window.innerHeight/2 + textHeight ){
         menu = 1;
         return;
       }
     
     //keyMenu enter
-     if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight/2 - window.innerHeight/8 - textHeight && mouseY < window.innerHeight/2 - window.innerHeight/8 + textHeight){
+     if (go == 1 && menu == 1 && keyMenu == 0 && p.mouseX > p.window.innerWidth/2 - p.window.innerWidth/10 && p.mouseX < p.window.innerWidth/2 + p.window.innerWidth/10 && p.mouseY > p.window.innerHeight/2 - p.window.innerHeight/8 - textHeight && p.mouseY < p.window.innerHeight/2 - p.window.innerHeight/8 + textHeight){
         menu = 0;
         keyMenu = 1;
         return;
      }
 
     //menu exit to play screen
-    if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 + window.innerHeight/8 + textHeight/2 && mouseY < window.innerHeight/2 + window.innerHeight/8 + 2*textHeight){
+    if (go == 1 && menu == 1 && keyMenu == 0 && p.mouseX > p.window.innerWidth/2 - p.window.innerWidth/8 && p.mouseX < p.window.innerWidth/2 + p.window.innerWidth/8 && p.mouseY > p.window.innerHeight/2 + p.window.innerHeight/8 + textHeight/2 && p.mouseY < p.window.innerHeight/2 + p.window.innerHeight/8 + 2*textHeight){
         menu = 0;
         go = 1;
         keyMenu = 0;
@@ -302,7 +307,7 @@ function mousePressed(){
       
       
       //exit to play screen
-      if(mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight - 2 * window.innerHeight/10 && mouseY < window.innerHeight + 2 * window.innerHeight/10) {
+      if(p.mouseX > p.window.innerWidth/2 - p.window.innerWidth/10 && p.mouseX < p.window.innerWidth/2 + p.window.innerWidth/10 && p.mouseY > p.window.innerHeight - 2 * p.window.innerHeight/10 && p.mouseY < p.window.innerHeight + 2 * p.window.innerHeight/10) {
         keyMenu = 0;
         menu = 0;
         go = 1;
@@ -311,7 +316,7 @@ function mousePressed(){
   }
 
 
-function initKeyboard(){
+  p.initKeyboard = function(){
     for (let i = 0; i < 7; i++){
         teclasBrancas[i] = new kbKey(wkPos, wkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 0, i);
       }
@@ -323,12 +328,12 @@ function initKeyboard(){
       }
   }
   
-  function showKeyboard() {
-    background(0,0,255);
-    rectMode(CENTER);
-    strokeWeight(keyboardSW);
-    stroke(0);
-    fill(0,0,255);
+p.showKeyboard = function() {
+  p.background(0,0,255);
+  p.rectMode(p.CENTER);
+  p.strokeWeight(keyboardSW);
+  p.stroke(0);
+  p.fill(0,0,255);
     
     
     for (let i = 0; i < 7; i++){
@@ -412,4 +417,6 @@ function initKeyboard(){
   //   }
   // }
 
-  
+}  
+
+  new p5(mySketch);
