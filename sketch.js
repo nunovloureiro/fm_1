@@ -76,7 +76,7 @@ p.setup = function() {
 
     p.textFont(font);
     p.textSize(p.windowWidth/5);
-    p.textAlign(CENTER,CENTER);
+    p.textAlign(p.CENTER,p.CENTER);
     textHeight = p.windowWidth/10;
 
   
