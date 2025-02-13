@@ -225,7 +225,7 @@ p.gui = function(){
     
   }
   
-mousePressed = function (){
+p.mousePressed = function (){
 
     console.log('mX', p.mouseX, 'mY', p.mouseY);
 
