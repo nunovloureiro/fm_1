@@ -81,7 +81,8 @@
                 script.src = "sketch.js";
                 script.onload = () => console.log("sketch.js loaded successfully");
                 script.onerror = () => console.error("Error loading sketch.js");
-                document.body.appendChild(script);
+                //document.body.appendChild(script);
+                document.createElement("script")
                 //console.log("load sketch function");
             }
 
