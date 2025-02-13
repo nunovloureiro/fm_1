@@ -62,7 +62,6 @@ let tendY;
 
 
 
-
 p.preload = function(){
   font = p.loadFont('tiny5.ttf');
 }
@@ -325,12 +324,12 @@ p.mousePressed = function (){
 
   p.initKeyboard = function(){
     for (let i = 0; i < 7; i++){
-        teclasBrancas[i] = new kbKey(p, wkPos, wkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 0, i);
+        teclasBrancas[i] = new p.kbKey(p, wkPos, wkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 0, i);
       }
     for (let i = 0; i < 6; i++){
        if (i == 2){
        } else {
-          teclasPretas[i] = new kbKey(p, bkPos, bkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 1, i);
+          teclasPretas[i] = new p.kbKey(p, bkPos, bkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 1, i);
         }
       }
   }
@@ -423,6 +422,38 @@ p.showKeyboard = function() {
   //     });
   //   }
   // }
+
+
+// p.kbKey = class {
+//     constructor(p, x, y, keySize, keyboardSW, w_b, keyID) {   //   w_b -> white or black key
+//       this.p = p;
+//       this.x = x;
+//       this.y = y;
+//       this.keySize = keySize;
+//       this.keySW = keyboardSW;
+//       this.keyID = keyID;
+//       this.w_b = w_b;
+//       //this.selected = keySelector;
+//       this.selected = 255;
+//     }
+    
+//     show = function() {  
+//       this.p.strokeWeight(this.keySW);
+//       this.p.stroke(0);
+//       this.p.fill(0,0,this.selected);
+//       this.p.square(this.x, this.y,  this.keySize);
+//     }
+    
+    
+//     p.isClicked = function(){
+//       let offsetY = this.w_b === 1 ? this.keySize * 0.3 : 0; // Slightly shift detection for black keys
+//       return (p.mouseX > this.x - this.keySize / 2 &&
+//         this.p.mouseX < this.x + this.keySize / 2 &&
+//         this.p.mouseY > this.y - this.keySize / 2 &&
+//         this.p.mouseY < this.y + this.keySize / 2);
+//     }
+//   }
+
 
 }  
 
