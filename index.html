@@ -77,22 +77,39 @@
 
             // Function to load p5js sketch with button
             function loadSketch() {
-                // Create a script element for p5.js
-                const p5Script = document.createElement("script");
-                p5Script.src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js";
-                p5Script.onload = () => {
-                    console.log("p5.js loaded, now loading sketch.js");
-                    // Now that p5.js is loaded, create a script element for sketch.js
-                    const sketchScript = document.createElement("script");
-                    sketchScript.src = "sketch.js";
-                    sketchScript.onload = () => console.log("sketch.js loaded successfully");
-                    sketchScript.onerror = () => console.error("Error loading sketch.js");
-                    document.body.appendChild(sketchScript);
-                };
-                p5Script.onerror = () => console.error("Error loading p5.js");
-                // Append the p5.js script element to the document
-                document.body.appendChild(p5Script);
+            // Create a script element for p5.js
+            const p5Script = document.createElement("script");
+            p5Script.src = "https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js";
+            p5Script.onload = () => {
+                console.log("p5.js loaded, now loading sketch.js");
+                // Now that p5.js is loaded, create a script element for sketch.js
+                const sketchScript = document.createElement("script");
+                sketchScript.src = "sketch.js";
+                sketchScript.defer = true;
+                sketchScript.onload = () => console.log("sketch.js loaded successfully");
+                sketchScript.onerror = () => console.error("Error loading sketch.js");
+                document.body.appendChild(sketchScript);
+            };
+
+            p5Script.onerror = () => console.error("Error loading p5.js");
+            // Append the p5.js script element to the document
+            document.body.appendChild(p5Script);
             }
+
+                        // Function to load p5js sketch with button
+                //         function loadSketch() {
+                //     let script = document.createElement("script");
+                //     script.src = "sketch.js";
+                    // script.defer = true;  // Helps with execution order
+                //     script.onload = () => {
+                //     console.log("sketch.js loaded successfully");
+                //     if (typeof setup === "function") {
+                //         setup();
+                //     }
+                // };
+                //     script.onerror = () => console.error("Error loading sketch.js");
+                //     document.body.appendChild(script);
+                // }
 
             // ------------- 1. WEB PAGE INITIALIZATION
             const loadingDiv = document.querySelector('#loading')
