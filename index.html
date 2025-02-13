@@ -63,9 +63,6 @@
 
             const initApp = async () => {
 
-
-
-
                 // Register the worklet
                 await WebPdRuntime.initialize(audioContext)
 
@@ -130,11 +127,13 @@
                         console.error("Error requesting motion permission:", error);
                         return;
                     }
+                permissionsButton.style.display = 'none'
                 startButton.style.display = 'block'
             };
 
-            startButton.onclick = startApp
             permissionsButton.onclick = askPermissions
+            startButton.onclick = startApp
+            
 
             initApp().
                 then(() => {
