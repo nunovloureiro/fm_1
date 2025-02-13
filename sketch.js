@@ -61,7 +61,7 @@ let tendY;
 
 
 p.preload = function(){
-  font = loadFont('tiny5.ttf');
+  font = p.loadFont('tiny5.ttf');
 }
 
 p.setup = function() {
