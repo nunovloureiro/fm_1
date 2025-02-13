@@ -325,12 +325,12 @@ p.mousePressed = function (){
 
   p.initKeyboard = function(){
     for (let i = 0; i < 7; i++){
-        teclasBrancas[i] = new kbKey(wkPos, wkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 0, i);
+        teclasBrancas[i] = new kbKey(p, wkPos, wkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 0, i);
       }
     for (let i = 0; i < 6; i++){
        if (i == 2){
        } else {
-          teclasPretas[i] = new kbKey(bkPos, bkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 1, i);
+          teclasPretas[i] = new kbKey(p, bkPos, bkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 1, i);
         }
       }
   }

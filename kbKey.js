@@ -1,5 +1,5 @@
 class kbKey {
-    constructor(x, y, keySize, keyboardSW, w_b, keyID) {   //   w_b -> white or black key
+    constructor(p, x, y, keySize, keyboardSW, w_b, keyID) {   //   w_b -> white or black key
       this.x = x;
       this.y = y;
       this.keySize = keySize;
@@ -12,18 +12,18 @@ class kbKey {
     }
     
     show() {  
-      p.strokeWeight(this.keySW);
-      p.stroke(0);
-      p.fill(0,0,this.selected);
-      p.square(this.x, this.y,  this.keySize);
+      this.p.strokeWeight(this.keySW);
+      this.p.stroke(0);
+      this.p.fill(0,0,this.selected);
+      this.p.square(this.x, this.y,  this.keySize);
     }
     
     
     isClicked(){
       let offsetY = this.w_b === 1 ? this.keySize * 0.3 : 0; // Slightly shift detection for black keys
       return (p.mouseX > this.x - this.keySize / 2 &&
-        p.mouseX < this.x + this.keySize / 2 &&
-        p.mouseY > this.y - this.keySize / 2 &&
-        p.mouseY < this.y + this.keySize / 2);
+        this.p.mouseX < this.x + this.keySize / 2 &&
+        this.p.mouseY > this.y - this.keySize / 2 &&
+        this.p.mouseY < this.y + this.keySize / 2);
     }
   }
