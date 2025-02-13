@@ -11,7 +11,7 @@ let TWstartText;
 let TWmenuText;
 let textHeight;
 
-let go = 0;
+let go = 1;
 let menu = 0;
 let keyMenu = 0;
 let scaleMenu = 0;
@@ -114,17 +114,17 @@ function draw() {
     text('my= ' + my, 20, 160);
 }
 
-function checkAppStart() {
-  console.log("enter checkAppStart function");
-    if (window.appStarted) {
-        console.log("App started, initializing sketch.js features.");
-        go = 1;
-        console.log("go", go);
-        } else {
-        console.log("checkAppStart nopeeeee")
-        setTimeout(checkAppStart, 100); // Check again in 100ms
-    }
-}
+// function checkAppStart() {
+//   console.log("enter checkAppStart function");
+//     if (window.appStarted) {
+//         console.log("App started, initializing sketch.js features.");
+//         go = 1;
+//         console.log("go", go);
+//         } else {
+//         console.log("checkAppStart nopeeeee")
+//         setTimeout(checkAppStart, 100); // Check again in 100ms
+//     }
+// }
 
 function rotationValueLimiter() {
     rx = max(rx, 0);
@@ -213,122 +213,27 @@ function gui(){
     
   }
   
-// function mousePressed(){
-
-//     //play screen  && requestButton == 1
-//       if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-//         if (iOSpermissions === 0){
-//           startApp(); //starts webPD audio app
-//           checkAppStart();
-//           console.log('WebPD started supostamente');
-//           return;
-//         } else if (iOSpermissions === 1){
-//             requestMotionSensorPermission();
-//             if (permissionGranted === 1){
-//               startApp(); //starts webPD audio app
-//               checkAppStart();
-//               console.log('WebPD started supostamente');
-//               return;
-//             } else {
-//               fill(255,0,0);
-//             }
-//         }
-//       }
-    
-//     //menu enter
-//       if (go == 1 && menu == 0 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight ){
-//         menu = 1;
-//         return;
-//       }
-    
-//     //keyMenu enter
-//      if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight/2 - window.innerHeight/8 - textHeight && mouseY < window.innerHeight/2 - window.innerHeight/8 + textHeight){
-//         menu = 0;
-//         keyMenu = 1;
-//         return;
-//      }
-
-//     //menu exit to play screen
-//     if (go == 1 && menu == 1 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/8 && mouseX < window.innerWidth/2 + window.innerWidth/8 && mouseY > window.innerHeight/2 + window.innerHeight/8 + textHeight/2 && mouseY < window.innerHeight/2 + window.innerHeight/8 + 2*textHeight){
-//         menu = 0;
-//         go = 1;
-//         keyMenu = 0;
-//      }
-
-//     //keyMenu Changes
-//     if (keyMenu == 1 && menu == 0){
-//         let newHitKey = null;
-//         // Check white keys
-//         for (let i = 0; i < teclasBrancas.length; i++) {
-//           if (teclasBrancas[i].isClicked()) {
-//             newHitKey = teclasBrancas[i];
-//             break;
-//           }
-//         }
-//         // Check black keys only if no white key was hit.
-//         if (!newHitKey) {
-//           for (let i = 0; i < teclasPretas.length; i++) {
-//             if(i == 2){
-//               continue;
-//             } else{
-//             if (teclasPretas[i].isClicked()) {
-//               newHitKey = teclasPretas[i];
-//               break;
-//               }
-//             }
-//           }
-//         }
-      
-//       // Only update selection if a key was actually clicked.
-//       if (newHitKey) {
-//         // Unselect all keys.
-//         for (let i = 0; i < teclasBrancas.length; i++) {
-//           teclasBrancas[i].selected = 255;
-//         }
-//         for (let i = 0; i < teclasPretas.length; i++) {
-//             if(i == 2){
-//                 continue;
-//             } else {
-//                 teclasPretas[i].selected = 255;
-//               }
-//             }
-//         // Set new selected key
-//         hitKey = newHitKey;
-//         hitKey.selected = 0;
-//         console.log('Key pressed:', hitKey.w_b, hitKey.keyID);
-//         }
-      
-      
-//       //exit to play screen
-//       if(mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight - 2 * window.innerHeight/10 && mouseY < window.innerHeight + 2 * window.innerHeight/10) {
-//         keyMenu = 0;
-//         menu = 0;
-//         go = 1;
-//       }
-//    }
-//   }
-
-  function touchStarted(){
+function mousePressed(){
 
     //play screen  && requestButton == 1
-      if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
-        if (iOSpermissions === 0){
-          // startApp(); //starts webPD audio app
-          checkAppStart();
-          console.log('WebPD started supostamente');
-          return;
-        } else if (iOSpermissions === 1){
-            requestMotionSensorPermission();
-            if (permissionGranted === 1){
-              // startApp(); //starts webPD audio app
-              checkAppStart();
-              console.log('WebPD started supostamente');
-              return;
-            } else {
-              fill(255,0,0);
-            }
-        }
-      }
+      // if (go == 0 && mouseX > window.innerWidth/2 - TWstartText/2 && mouseX < window.innerWidth/2 + TWstartText/2 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight){
+      //   if (iOSpermissions === 0){
+      //     startApp(); //starts webPD audio app
+      //     checkAppStart();
+      //     console.log('WebPD started supostamente');
+      //     return;
+      //   } else if (iOSpermissions === 1){
+      //       requestMotionSensorPermission();
+      //       if (permissionGranted === 1){
+      //         startApp(); //starts webPD audio app
+      //         checkAppStart();
+      //         console.log('WebPD started supostamente');
+      //         return;
+      //       } else {
+      //         fill(255,0,0);
+      //       }
+      //   }
+      // }
     
     //menu enter
       if (go == 1 && menu == 0 && keyMenu == 0 && mouseX > window.innerWidth/2 - window.innerWidth/10 && mouseX < window.innerWidth/2 + window.innerWidth/10 && mouseY > window.innerHeight/2 - textHeight && mouseY < window.innerHeight/2 + textHeight ){
@@ -403,9 +308,6 @@ function gui(){
    }
   }
 
-  function touchEnded(){
-    return false;
-  }
 
 function initKeyboard(){
     for (let i = 0; i < 7; i++){

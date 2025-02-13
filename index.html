@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
         <title>cell.exp</title>
         <style>
-            body {background-color: black;}
+            /* body {background-color: black;} */
             #start {
                 display: none;
                 position: fixed;
@@ -53,8 +53,8 @@
         </style>
     </head>
     <body>
-        <h1>My Web Page</h1>
-        <div>For more info about usage (how to interact with the patch), you can open this HTML file in a code editor.</div>
+        <!-- <h1>My Web Page</h1>
+        <div>For more info about usage (how to interact with the patch), you can open this HTML file in a code editor.</div> -->
         <button id="start"> start </button>
         <button id="permissions"> iOS? </button>
         <div id="loading"> Loading ... </div>
@@ -75,9 +75,9 @@
 
             // Function to load p5js sketch with button
             function loadSketch() {
-                let sketch = document.createElement("sketch");
-                sketch.src = "sketch.js";
-                document.body.appendChild(sketch);
+                let script = document.createElement("script");
+                script.src = "sketch.js";
+                document.body.appendChild(script);
             }
 
             // ------------- 1. WEB PAGE INITIALIZATION
@@ -161,7 +161,10 @@
             };
 
             permissionsButton.onclick = askPermissions
-            startButton.onclick = startApp, loadSketch
+            startButton.onclick = () => {
+                startApp();
+                loadSketch();
+            };
             
 
             initApp().
