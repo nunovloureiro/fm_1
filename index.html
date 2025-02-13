@@ -61,7 +61,7 @@
         <button id="permissions"> iOS? </button>
         <div id="loading"> Loading ... </div>
         <script src="webpd-runtime.js"></script>
-        <script src="kbKey.js"></script>
+        
 
         <script>
             // SUMMARY
@@ -82,6 +82,9 @@
                 let script = document.createElement("script");
                 script.src = "sketch.js";
                 script.defer = true;  // Helps with execution order
+                let kbKeys = document.createElement(("script"));
+                kbKeys.src = "kbKey.js";
+                kbKeys.defer = true;
                 script.onload = () => {
                     console.log("sketch.js loaded successfully");                    
                     if (typeof setup === "function") {
