@@ -1,5 +1,6 @@
 class kbKey {
     constructor(p, x, y, keySize, keyboardSW, w_b, keyID) {   //   w_b -> white or black key
+      this.p = p;
       this.x = x;
       this.y = y;
       this.keySize = keySize;
