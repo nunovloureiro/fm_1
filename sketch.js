@@ -1,5 +1,10 @@
 document.addEventListener('touchstart', handleTouchStart);
 
+handleTouchStart = function(event) {
+  // Your code here to handle the touch start event
+  console.log('Touch started!', event);
+}
+
 let mySketch = function(p) {
 
 
@@ -53,10 +58,7 @@ let tendY;
 
 
 
-p.handleTouchStart = function(event) {
-  // Your code here to handle the touch start event
-  console.log('Touch started!', event);
-}
+
 
 p.preload = function(){
   font = loadFont('tiny5.ttf');
