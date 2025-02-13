@@ -64,7 +64,7 @@
         await WebPdRuntime.initialize(audioContext);
 
         // Fetch the patch code
-        const response = await fetch('patch.wasm');
+        response = await fetch('patch.wasm');
         patch = await response.arrayBuffer();
 
         // Uncomment if you need audio input:
@@ -78,7 +78,7 @@
       const startApp = async () => {
         // Resume AudioContext on user interaction
         if (audioContext.state === 'suspended') {
-          await audioContext.resume();
+          audioContext.resume();
         }
 
         // Setup web audio graph
