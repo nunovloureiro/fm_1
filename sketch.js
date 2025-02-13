@@ -60,6 +60,7 @@ function preload(){
 
 function setup() {
 
+    console.log("sketch enter setup");
     createCanvas(window.innerWidth, window.innerHeight);
     frameRate(15);
     angleMode(RADIANS);
