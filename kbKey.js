@@ -12,7 +12,7 @@ class kbKey {
       
     }
     
-    show() {  
+    p.show() {  
       this.p.strokeWeight(this.keySW);
       this.p.stroke(0);
       this.p.fill(0,0,this.selected);
@@ -20,7 +20,7 @@ class kbKey {
     }
     
     
-    isClicked(){
+    p.isClicked(){
       let offsetY = this.w_b === 1 ? this.keySize * 0.3 : 0; // Slightly shift detection for black keys
       return (p.mouseX > this.x - this.keySize / 2 &&
         this.p.mouseX < this.x + this.keySize / 2 &&
