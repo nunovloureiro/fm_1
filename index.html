@@ -82,9 +82,9 @@
                 let script = document.createElement("script");
                 script.src = "sketch.js";
                 script.defer = true;  // Helps with execution order
-                let kbKeys = document.createElement(("script"));
-                kbKeys.src = "kbKey.js";
-                kbKeys.defer = true;
+                // let kbKeys = document.createElement(("script"));
+                // kbKeys.src = "kbKey.js";
+                // kbKeys.defer = true;
                 script.onload = () => {
                     console.log("sketch.js loaded successfully");                    
                     if (typeof setup === "function") {
