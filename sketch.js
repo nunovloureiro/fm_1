@@ -1,5 +1,4 @@
-// This fixed it, preferably this would be hidden away though
-document.addEventListener('touchstart', {});
+
 
 // document.addEventListener('touchstart', handleTouchStart);
 
@@ -9,6 +8,10 @@ document.addEventListener('touchstart', {});
 // }
 
 let mySketch = function(p) {
+
+// This fixed it, preferably this would be hidden away though
+document.addEventListener('touchstart', {});
+
 
 let mx;
 let my;
