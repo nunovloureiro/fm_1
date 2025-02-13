@@ -300,6 +300,7 @@ p.mousePressed = function (){
         hitKey = newHitKey;
         hitKey.selected = 0;
         console.log('Key pressed:', hitKey.w_b, hitKey.keyID);
+        sendMsgToWebPd("n_0_35", "0", [hitKey.w_b, hitKey.keyID]); //SCALE É O N_0_37
         }
       
       
