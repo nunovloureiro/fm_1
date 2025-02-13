@@ -10,8 +10,6 @@ document.addEventListener('touchstart', {});
 
 let mySketch = function(p) {
 
-let p.kbKey = kbKey;
-
 let mx;
 let my;
 let rx = 0;
@@ -42,17 +40,6 @@ let teclasPretas = [];
 let teclado = [];
 let keyID;
 
-let permissionGranted = 0;
-let requestButton = 0;
-let androidStop = 0;
-
-let iOSpermissions = 0;
-
-let tstartX;
-let tendX;
-
-let tstartY;
-let tendY;
 
 
 
