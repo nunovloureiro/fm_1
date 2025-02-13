@@ -51,7 +51,6 @@ document.addEventListener('touchstart', handleTouchStart);
 function handleTouchStart(event) {
   // Your code here to handle the touch start event
   console.log('Touch started!', event);
-  isiOSdevice();
 }
 
 function preload(){
@@ -65,6 +64,8 @@ function setup() {
     frameRate(15);
     angleMode(RADIANS);
     rectMode(CENTER);
+
+    background(0);
 
     textFont(font);
     textSize(window.innerWidth/5);
@@ -360,55 +361,55 @@ function initKeyboard(){
 //}
 
 
-  function isiOSdevice(){
-    // Check if the device is running iOS
-    const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    if (!isiOS) {
-      console.log("Not an iOS device. No sensor permission needed.");
-      iOSpermissions = 0;
-      return;
-    }
-    else {
-      console.log("iOS device. Sensor permission needed.");
-      iOSpermissions = 1;
-    }
-  }
+  // function isiOSdevice(){
+  //   // Check if the device is running iOS
+  //   const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  //   if (!isiOS) {
+  //     console.log("Not an iOS device. No sensor permission needed.");
+  //     iOSpermissions = 0;
+  //     return;
+  //   }
+  //   else {
+  //     console.log("iOS device. Sensor permission needed.");
+  //     iOSpermissions = 1;
+  //   }
+  // }
 
 
-  function requestMotionSensorPermission() {
+  // function requestMotionSensorPermission() {
     
-    // For iOS 13+ where permission is required
-    if (typeof DeviceMotionEvent !== "undefined" &&
-        typeof DeviceMotionEvent.requestPermission === "function") {
-      DeviceMotionEvent.requestPermission()
-        .then(response => {
-          if (response === "granted") {
-            console.log("Motion sensor permission granted!");
+  //   // For iOS 13+ where permission is required
+  //   if (typeof DeviceMotionEvent !== "undefined" &&
+  //       typeof DeviceMotionEvent.requestPermission === "function") {
+  //     DeviceMotionEvent.requestPermission()
+  //       .then(response => {
+  //         if (response === "granted") {
+  //           console.log("Motion sensor permission granted!");
             
-            // Attach a listener if you want to process sensor data
-            window.addEventListener("devicemotion", (event) => {
-              // Process sensor data here if needed
-              console.log("Acceleration:", event.acceleration);
-              console.log("Acceleration including gravity:", event.accelerationIncludingGravity);
-              console.log("Rotation rate:", event.rotationRate);
-              permissionGranted = 1;
-            });
-          } else {
-            console.error("Motion sensor permission denied.");
-            permissionGranted = 0;
-          }
-        })
-        .catch(error => {
-          console.error("Error requesting motion sensor permission:", error);
-          permissionGranted = 0;
-        });
-    } else {
-      // Fallback for devices or browsers that don't require a permission prompt
-      console.log("DeviceMotionEvent.requestPermission is not available.");
-      window.addEventListener("devicemotion", (event) => {
-        console.log("Motion event:", event);
-      });
-    }
-  }
+  //           // Attach a listener if you want to process sensor data
+  //           window.addEventListener("devicemotion", (event) => {
+  //             // Process sensor data here if needed
+  //             console.log("Acceleration:", event.acceleration);
+  //             console.log("Acceleration including gravity:", event.accelerationIncludingGravity);
+  //             console.log("Rotation rate:", event.rotationRate);
+  //             permissionGranted = 1;
+  //           });
+  //         } else {
+  //           console.error("Motion sensor permission denied.");
+  //           permissionGranted = 0;
+  //         }
+  //       })
+  //       .catch(error => {
+  //         console.error("Error requesting motion sensor permission:", error);
+  //         permissionGranted = 0;
+  //       });
+  //   } else {
+  //     // Fallback for devices or browsers that don't require a permission prompt
+  //     console.log("DeviceMotionEvent.requestPermission is not available.");
+  //     window.addEventListener("devicemotion", (event) => {
+  //       console.log("Motion event:", event);
+  //     });
+  //   }
+  // }
 
   
