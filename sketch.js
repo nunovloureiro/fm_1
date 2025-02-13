@@ -1,3 +1,6 @@
+// This fixed it, preferably this would be hidden away though
+document.addEventListener('touchstart', {});
+
 // document.addEventListener('touchstart', handleTouchStart);
 
 // handleTouchStart = function(event) {
@@ -72,7 +75,7 @@ p.setup = function() {
     p.angleMode(p.RADIANS);
     p.rectMode(p.CENTER);
 
-    p.background(0);
+    //p.background(0);
 
     p.textFont(font);
     p.textSize(p.windowWidth/5);
@@ -144,10 +147,10 @@ p.rotationValueLimiter = function() {
 p.scallingAndOrientation = function(){
     if (p.windowWidth <= p.windowHeight){
         keySize = p.windowHeight/20;
-        keyboardSW = p.keySize/6;
+        keyboardSW = keySize/6;
         wkeyVertOfset = p.windowHeight/8;
         bkeyVertOfset = p.windowHeight/6;
-        keyVertDist = 1.4 * p.keySize;
+        keyVertDist = 1.4 * keySize;
         wkPos = p.windowWidth/2 - keySize/1.5;
         bkPos = p.windowWidth/2 + keySize/1.5;
       } else {
@@ -245,7 +248,7 @@ mousePressed = function (){
       // }
     
     //menu enter
-      if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth/2 - p.windowWidth/10 && p.mouseX < p.windowWidth/2 + p.windowWidth/10 && p.mouseY > p.windowHeight/2 - textHeight && p.mouseY < p.windowHeight/2 + textHeight ){
+      if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth/2 - p.windowWidth/10 && p.mouseX < p.windowWidth/2 + p.windowWidth/10 && p.mouseY > p.windowHeight/2 - textHeight && p.mouseY < p.windowHeight/2 + textHeight){
         menu = 1;
         return;
       }
