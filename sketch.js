@@ -67,7 +67,7 @@ p.preload = function(){
 p.setup = function() {
 
     console.log("sketch enter setup");
-    p.createCanvas(p.window.innerWidth,p.window.innerHeight);
+    p.createCanvas(p.windowWidth,p.windowHeight);
     p.frameRate(15);
     p.angleMode(p.RADIANS);
     p.rectMode(p.CENTER);
@@ -75,9 +75,9 @@ p.setup = function() {
     p.background(0);
 
     p.textFont(font);
-    p.textSize(p.window.innerWidth/5);
+    p.textSize(p.windowWidth/5);
     p.textAlign(CENTER,CENTER);
-    textHeight = p.window.innerWidth/10;
+    textHeight = p.windowWidth/10;
 
   
     //keyboard size according to display size
@@ -101,16 +101,16 @@ p.draw = function() {
     p.rotationValueLimiter();
 
     p.fill(255, 0, 0);
-    p.rect(p.window.innerWidth / 4, p.window.innerHeight / 2, 5, 0 + rx * 100);
+    p.rect(p.windowWidth / 4, p.windowHeight / 2, 5, 0 + rx * 100);
 
     // fill(0, 255, 0);
     // rect(window.innerWidth / 2, window.innerHeight / 2, 5, 0 + ry * 100);
 
     p.fill(0, 0, 255);
-    p.rect(p.window.innerWidth - p.window.innerWidth / 4, p.window.innerHeight / 2, 5, 0 + rz * 100);
+    p.rect(p.windowWidth - p.windowWidth / 4, p.windowHeight / 2, 5, 0 + rz * 100);
 
-    mx = p.map(p.mouseX, 0, p.window.innerWidth, 0, 1);
-    my = p.map(p.mouseY, 0, p.window.innerWidth, 0, 6);
+    mx = p.map(p.mouseX, 0, p.windowWidth, 0, 1);
+    my = p.map(p.mouseY, 0, p.windowWidth, 0, 6);
 
     p.fill(0,0,255);
     p.textAlign(p.LEFT);
@@ -142,22 +142,22 @@ p.rotationValueLimiter = function() {
 }
 
 p.scallingAndOrientation = function(){
-    if (p.window.innerWidth <= p.window.innerHeight){
-        keySize = p.window.innerHeight/20;
+    if (p.windowWidth <= p.windowHeight){
+        keySize = p.windowHeight/20;
         keyboardSW = p.keySize/6;
-        wkeyVertOfset = p.window.innerHeight/8;
-        bkeyVertOfset = p.window.innerHeight/6;
+        wkeyVertOfset = p.windowHeight/8;
+        bkeyVertOfset = p.windowHeight/6;
         keyVertDist = 1.4 * p.keySize;
-        wkPos = p.window.innerWidth/2 - keySize/1.5;
-        bkPos = p.window.innerWidth/2 + keySize/1.5;
+        wkPos = p.windowWidth/2 - keySize/1.5;
+        bkPos = p.windowWidth/2 + keySize/1.5;
       } else {
-        keySize = p.window.innerHeight/16;
+        keySize = p.windowHeight/16;
         keyboardSW = keySize/6;
-        wkeyVertOfset = p.window.innerHeight/8;
-        bkeyVertOfset = p.window.innerHeight/6;
+        wkeyVertOfset = p.windowHeight/8;
+        bkeyVertOfset = p.windowHeight/6;
         keyVertDist = 1.4 * keySize;
-        wkPos = p.window.innerWidth/2 - keySize/1.5;
-        bkPos = p.window.innerWidth/2 + keySize/1.5;
+        wkPos = p.windowWidth/2 - keySize/1.5;
+        bkPos = p.windowWidth/2 + keySize/1.5;
       }
 }
 
@@ -169,11 +169,11 @@ p.gui = function(){
       p.background(0);
       p.fill(0,0,255);
       p.rectMode(p.CENTER);
-      p.rect(p.window.innerWidth/2, p.window.innerHeight/2, TWstartText + p.window.innerWidth/70, p.window.innerWidth/5);
+      p.rect(p.windowWidth/2, p.windowHeight/2, TWstartText + p.windowWidth/70, p.windowWidth/5);
       p.fill(0);
       p.textAlign(p.CENTER,p.CENTER);
-      p.textSize(p.window.innerWidth/5);
-      p.text('start', p.window.innerWidth/2, p.window.innerHeight/2)
+      p.textSize(p.windowWidth/5);
+      p.text('start', p.windowWidth/2, p.windowHeight/2)
       
     } 
     // play screen
@@ -181,11 +181,11 @@ p.gui = function(){
       p.background(0);
       p.fill(0,0,255);
       p.rectMode(p.CENTER);
-      p.rect(p.window.innerWidth/2, p.window.innerHeight/2, p.window.innerWidth/5, p.window.innerWidth/5);
+      p.rect(p.windowWidth/2, p.windowHeight/2, p.windowWidth/5, p.windowWidth/5);
       p.fill(0);
       p.textAlign(p.CENTER,p.CENTER);
-      p.textSize(p.window.innerWidth/5);
-      p.text('+', p.window.innerWidth/2, p.window.innerHeight/2);
+      p.textSize(p.windowWidth/5);
+      p.text('+', p.windowWidth/2, p.windowHeight/2);
 
         //console.log(webpdNode);
         //console.log(webpdNode.engine);
@@ -200,12 +200,12 @@ p.gui = function(){
     if (go == 1 && menu == 1 && keyMenu == 0){
       p.background(0,0,255);
       p.fill(0);
-      p.textSize(p.window.innerWidth/5);
+      p.textSize(p.windowWidth/5);
       p.textAlign(p.CENTER, p.CENTER);
-      p.text('key', p.window.innerWidth/2, p.window.innerHeight/2 - p.window.innerHeight/8 - textHeight);
-      p.text('scale', p.window.innerWidth/2, p.window.innerHeight/2);
-      p.textSize(p.window.innerWidth/5);
-      p.text('x', p.window.innerWidth/2, p.window.innerHeight/2 + p.window.innerHeight/8 + textHeight);
+      p.text('key', p.windowWidth/2, p.windowHeight/2 - p.windowHeight/8 - textHeight);
+      p.text('scale', p.windowWidth/2, p.windowHeight/2);
+      p.textSize(p.windowWidth/5);
+      p.text('x', p.windowWidth/2, p.windowHeight/2 + p.windowHeight/8 + textHeight);
     }
     
     //key menu
@@ -215,9 +215,9 @@ p.gui = function(){
       
       p.noStroke();
       p.fill(0);
-      p.textSize(p.window.innerWidth/5);
+      p.textSize(p.windowWidth/5);
       p.textAlign(p.CENTER, p.CENTER);
-      p.text('x', p.window.innerWidth/2, p.window.innerHeight - p.window.innerHeight/10);
+      p.text('x', p.windowWidth/2, p.windowHeight - p.windowHeight/10);
     }
     
   }
@@ -245,20 +245,20 @@ mousePressed = function (){
       // }
     
     //menu enter
-      if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.window.innerWidth/2 - p.window.innerWidth/10 && p.mouseX < p.window.innerWidth/2 + p.window.innerWidth/10 && p.mouseY > p.window.innerHeight/2 - textHeight && p.mouseY < p.window.innerHeight/2 + textHeight ){
+      if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth/2 - p.windowWidth/10 && p.mouseX < p.windowWidth/2 + p.windowWidth/10 && p.mouseY > p.windowHeight/2 - textHeight && p.mouseY < p.windowHeight/2 + textHeight ){
         menu = 1;
         return;
       }
     
     //keyMenu enter
-     if (go == 1 && menu == 1 && keyMenu == 0 && p.mouseX > p.window.innerWidth/2 - p.window.innerWidth/10 && p.mouseX < p.window.innerWidth/2 + p.window.innerWidth/10 && p.mouseY > p.window.innerHeight/2 - p.window.innerHeight/8 - textHeight && p.mouseY < p.window.innerHeight/2 - p.window.innerHeight/8 + textHeight){
+     if (go == 1 && menu == 1 && keyMenu == 0 && p.mouseX > p.windowWidth/2 - p.windowWidth/10 && p.mouseX < p.windowWidth/2 + p.windowWidth/10 && p.mouseY > p.windowHeight/2 - p.windowHeight/8 - textHeight && p.mouseY < p.windowHeight/2 - p.windowHeight/8 + textHeight){
         menu = 0;
         keyMenu = 1;
         return;
      }
 
     //menu exit to play screen
-    if (go == 1 && menu == 1 && keyMenu == 0 && p.mouseX > p.window.innerWidth/2 - p.window.innerWidth/8 && p.mouseX < p.window.innerWidth/2 + p.window.innerWidth/8 && p.mouseY > p.window.innerHeight/2 + p.window.innerHeight/8 + textHeight/2 && p.mouseY < p.window.innerHeight/2 + p.window.innerHeight/8 + 2*textHeight){
+    if (go == 1 && menu == 1 && keyMenu == 0 && p.mouseX > p.windowWidth/2 - p.windowWidth/8 && p.mouseX < p.windowWidth/2 + p.windowWidth/8 && p.mouseY > p.windowHeight/2 + p.windowHeight/8 + textHeight/2 && p.mouseY < p.windowHeight/2 + p.windowHeight/8 + 2*textHeight){
         menu = 0;
         go = 1;
         keyMenu = 0;
@@ -309,7 +309,7 @@ mousePressed = function (){
       
       
       //exit to play screen
-      if(p.mouseX > p.window.innerWidth/2 - p.window.innerWidth/10 && p.mouseX < p.window.innerWidth/2 + p.window.innerWidth/10 && p.mouseY > p.window.innerHeight - 2 * p.window.innerHeight/10 && p.mouseY < p.window.innerHeight + 2 * p.window.innerHeight/10) {
+      if(p.mouseX > p.windowWidth/2 - p.windowWidth/10 && p.mouseX < p.windowWidth/2 + p.windowWidth/10 && p.mouseY > p.windowHeight - 2 * p.windowHeight/10 && p.mouseY < p.windowHeight + 2 * p.windowHeight/10) {
         keyMenu = 0;
         menu = 0;
         go = 1;
