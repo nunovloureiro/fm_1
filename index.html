@@ -7,7 +7,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
 
         <title>cell.exp</title>
         <style>
@@ -79,11 +79,15 @@
             function loadSketch() {
                 let script = document.createElement("script");
                 script.src = "sketch.js";
-                script.onload = () => console.log("sketch.js loaded successfully");
+                script.defer = true;  // Helps with execution order
+                script.onload = () => {
+                console.log("sketch.js loaded successfully");
+                if (typeof setup === "function") {
+                    setup();
+                }
+            };
                 script.onerror = () => console.error("Error loading sketch.js");
-                //document.body.appendChild(script);
-                document.createElement("script")
-                //console.log("load sketch function");
+                document.body.appendChild(script);
             }
 
             // ------------- 1. WEB PAGE INITIALIZATION
