@@ -9,6 +9,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Tiny5&display=swap" rel="stylesheet">
         <title>cell.exp</title>
         <style>
+            body {background-color: black;}
             #start {
                 display: none;
                 position: fixed;
@@ -40,6 +41,7 @@
                 height: 100%;
                 position: fixed;
                 top: 50%;
+                left: 0%;
                 background: rgb(0, 0, 255);
                 font-family: "Tiny5", serif;
                 font-size: clamp(3rem, 3.5vw, 10rem);
@@ -53,10 +55,12 @@
     <body>
         <h1>My Web Page</h1>
         <div>For more info about usage (how to interact with the patch), you can open this HTML file in a code editor.</div>
-        <button id="start"> Start </button>
+        <button id="start"> start </button>
         <button id="permissions"> iOS? </button>
         <div id="loading"> Loading ... </div>
         <script src="webpd-runtime.js"></script>
+        <script src="kbKey.js"></script>
+
         <script>
             // SUMMARY
             // 1. WEB PAGE INITIALIZATION
@@ -68,6 +72,13 @@
                  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
                     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
              }
+
+            // Function to load p5js sketch with button
+            function loadSketch() {
+                let sketch = document.createElement("sketch");
+                sketch.src = "sketch.js";
+                document.body.appendChild(sketch);
+            }
 
             // ------------- 1. WEB PAGE INITIALIZATION
             const loadingDiv = document.querySelector('#loading')
@@ -150,7 +161,7 @@
             };
 
             permissionsButton.onclick = askPermissions
-            startButton.onclick = startApp
+            startButton.onclick = startApp, loadSketch
             
 
             initApp().
