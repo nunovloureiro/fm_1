@@ -1,9 +1,9 @@
-document.addEventListener('touchstart', handleTouchStart);
+// document.addEventListener('touchstart', handleTouchStart);
 
-handleTouchStart = function(event) {
-  // Your code here to handle the touch start event
-  console.log('Touch started!', event);
-}
+// handleTouchStart = function(event) {
+//   // Your code here to handle the touch start event
+//   console.log('Touch started!', event);
+// }
 
 let mySketch = function(p) {
 
