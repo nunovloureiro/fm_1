@@ -101,25 +101,25 @@
 
         if (isIOS()) {
           console.log("This device is running iOS.");
-          permissionsButton.style.display = 'block';
+        //   permissionsButton.style.display = 'block';
         } else {
           console.log("This device is not iOS.");
         }
       };
 
-      const askPermissions = async () => {
-        try {
-          const permissionState = await DeviceMotionEvent.requestPermission();
-          if (permissionState !== "granted") {
-            alert("Motion sensor permission denied. Some features may not work.");
-            return;
-          }
-          // Permission granted; you can now proceed with your code.
-        } catch (error) {
-          console.error("Error requesting motion permission:", error);
-          return;
-        }
-      };
+    //   const askPermissions = async () => {
+    //     try {
+    //       const permissionState = await DeviceMotionEvent.requestPermission();
+    //       if (permissionState !== "granted") {
+    //         alert("Motion sensor permission denied. Some features may not work.");
+    //         return;
+    //       }
+    //       // Permission granted; you can now proceed with your code.
+    //     } catch (error) {
+    //       console.error("Error requesting motion permission:", error);
+    //       return;
+    //     }
+    //   };
 
       // ------------- 3. SENDING MESSAGES FROM THE PATCH TO JAVASCRIPT
       const receiveMsgFromWebPd = (nodeId, portletId, message) => {
@@ -138,7 +138,7 @@
       };
 
       startButton.onclick = startApp;
-      permissionsButton.onclick = askPermissions;
+    //   permissionsButton.onclick = askPermissions;
 
       initApp().then(() => {
         console.log('App initialized');
