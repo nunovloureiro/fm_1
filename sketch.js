@@ -125,10 +125,11 @@ let mySketch = function(p) {
             
             //stop button
             p.fill(0, 0, 255);
-            p.rect(p.windowWidth / 2, p.windowHeight - p.windowHeight / 3, p.windowWidth / 1.7, p.windowWidth / 2.5);
+            p.rect(p.windowWidth / 2, p.windowHeight - p.windowHeight / 3, p.windowWidth / 1.7, p.windowWidth / 5);
 
             if (audioSpigot == 1){
-              p.text('pause', p.windowWidth / 2, p.windowHeight / 3 );
+              p.fill(0);
+              p.text('pause', p.windowWidth / 2, p.windowHeight - p.windowHeight / 3 );
               sendMsgToWebPd("n_0_9", "0", [rx]);
             } else {
               rx = audioSpigot;
