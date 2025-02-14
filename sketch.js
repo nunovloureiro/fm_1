@@ -1,4 +1,4 @@
-document.addEventListener('touchstart', handleTouchStart);
+document.addEventListener('touchstart', {});
 
 // function handleTouchStart(event) {
 //     console.log('Touch started!', event);
