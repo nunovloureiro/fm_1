@@ -1,8 +1,8 @@
-document.addEventListener('touchstart', handleTouchStart);
+// document.addEventListener('touchstart', handleTouchStart);
 
-function handleTouchStart(event) {
-    console.log('Touch started!', event);
-}
+// function handleTouchStart(event) {
+//     console.log('Touch started!', event);
+// }
 
 let mySketch = function(p) {
     // const WHITE_KEYS = 7;
