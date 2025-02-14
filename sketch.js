@@ -12,7 +12,7 @@ let mySketch = function(p) {
 
     let mx, my, rx = 0, ry = 0, rz = 0;
     let font, startText, menuText, TWstartText, TWmenuText, textHeight;
-    let go = 1, menu = 0, keyMenu = 0, scaleMenu = 0;
+    let go = 1, menu = 0, keyMenu = 0, scaleMenu = 0, audioSpigot = 1;
     let wkPos, bkPos, keySize, wkeyVertOfset, bkeyVertOfset, keyVertDist, keyboardSW;
     let teclasBrancas = [], teclasPretas = [], teclado = [], keyID;
 
@@ -122,9 +122,23 @@ let mySketch = function(p) {
             p.textAlign(p.CENTER, p.CENTER);
             p.textSize(p.windowWidth / 5);
             p.text('+', p.windowWidth / 2, p.windowHeight / 2);
+            
+            //stop button
+            p.fill(0, 0, 255);
+            p.rect(p.windowWidth / 2, p.windowHeight / 3, p.windowWidth / 3, p.windowWidth / 5);
 
-            sendMsgToWebPd("n_0_9", "0", [rx]);
+            if (audioSpigot == 1){
+              p.text('pause', p.windowWidth / 2, p.windowHeight / 3 );
+              sendMsgToWebPd("n_0_9", "0", [rx]);
+            } else {
+              rx = audioSpigot;
+              p.text('play', p.windowWidth / 2, p.windowHeight / 3 );
+              sendMsgToWebPd("n_0_9", "0", [rx]);
+            }
             sendMsgToWebPd("n_0_10", "0", [rz]);
+
+
+
         }
 
         if (go == 1 && menu == 1 && keyMenu == 0) {
@@ -163,6 +177,14 @@ let mySketch = function(p) {
         if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 10 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 10 && p.mouseY > p.windowHeight / 2 - textHeight && p.mouseY < p.windowHeight / 2 + textHeight) {
             menu = 1;
             return;
+        }
+
+        if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 6 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 6 && p.mouseY > p.windowHeight / 3 - textHeight && p.mouseY < p.windowHeight / 3 + textHeight) {
+            if (audioSpigot == 1){
+              audioSpigot = 0;
+            } else {
+              audioSpigot = 1;
+            }
         }
 
         if (go == 1 && menu == 1 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 10 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 10 && p.mouseY > p.windowHeight / 2 - p.windowHeight / 8 - textHeight && p.mouseY < p.windowHeight / 2 - p.windowHeight / 8 + textHeight) {
