@@ -201,7 +201,9 @@ let mySketch = function(p) {
             teclasBrancas[i] = new p.kbKey(wkPos, wkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 0, i);
         }
         for (let i = 0; i < BLACK_KEYS; i++) {
+          if (i != 2) {
             teclasPretas[i] = new p.kbKey(bkPos, bkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 1, i);
+          }
         }
     }
 
