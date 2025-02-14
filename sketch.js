@@ -5,8 +5,8 @@ function handleTouchStart(event) {
 }
 
 let mySketch = function(p) {
-    const WHITE_KEYS = 7;
-    const BLACK_KEYS = 6; // Excluding the 3rd black key
+    // const WHITE_KEYS = 7;
+    // const BLACK_KEYS = 6; // Excluding the 3rd black key
 
     let mx, my, rx = 0, ry = 0, rz = 0;
     let font, startText, menuText, TWstartText, TWmenuText, textHeight;
@@ -169,17 +169,27 @@ let mySketch = function(p) {
                 }
             }
             if (!newHitKey) {
-                for (let i = 0; i < teclasPretas.length +1; i++) {
+                for (let i = 0; i < teclasPretas.length; i++) {
+                  if(i == 2){
+                    continue;
+                  } else {
                     if (teclasPretas[i].isClicked()) {
                         newHitKey = teclasPretas[i];
                         break;
                     }
+                  }
                 }
             }
-
+            // Only update selection if a key was actually clicked.
             if (newHitKey) {
                 teclasBrancas.forEach(key => key.selected = 255);
-                teclasPretas.forEach(key => key.selected = 255);
+                for (let i = 0; i < teclasPretas.length; i++) {
+                  if(i == 2){
+                      continue;
+                  } else {
+                      teclasPretas[i].selected = 255;
+                    }
+                  }
                 hitKey = newHitKey;
                 hitKey.selected = 0;
                 console.log('Key pressed:', hitKey.w_b, hitKey.keyID);
@@ -215,7 +225,12 @@ let mySketch = function(p) {
         p.fill(0, 0, 255);
 
         teclasBrancas.forEach(key => key.show());
-        teclasPretas.forEach(key => key.show());
+        for (let i = 0; i < 6; i++){
+          if (i == 2){
+           } else {
+             teclasPretas[i].show();
+            }
+         }
     }
 
     p.kbKey = class {
