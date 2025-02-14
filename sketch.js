@@ -40,7 +40,7 @@ let mySketch = function(p) {
         TWstartText = p.textWidth('start');
         TWmenuText = p.textWidth('+');
 
-        if (isIOStoggle){
+        if (isIOSToggle){
           p.touchStarted();
         }
 
