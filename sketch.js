@@ -132,6 +132,7 @@ let mySketch = function(p) {
               sendMsgToWebPd("n_0_9", "0", [rx]);
             } else {
               rx = audioSpigot;
+              p.fill(0);
               p.text('play', p.windowWidth / 2, p.windowHeight - p.windowHeight / 3 );
               sendMsgToWebPd("n_0_9", "0", [rx]);
             }
