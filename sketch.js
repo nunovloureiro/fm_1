@@ -279,6 +279,7 @@ p.mousePressed = function (){
         hitKey.selected = 0;
         console.log('Key pressed:', hitKey.w_b, hitKey.keyID);
         let key2pd = hitKey.w_b + 0.1 * hitKey.keyID;
+        console.log(key2pd);
         sendMsgToWebPd("n_0_35", "0", [key2pd]); //SCALE É O N_0_37
         }
       
