@@ -169,7 +169,7 @@ let mySketch = function(p) {
                 }
             }
             if (!newHitKey) {
-                for (let i = 0; i < teclasPretas.length; i++) {
+                for (let i = 0; i < teclasPretas.length +1; i++) {
                     if (teclasPretas[i].isClicked()) {
                         newHitKey = teclasPretas[i];
                         break;
