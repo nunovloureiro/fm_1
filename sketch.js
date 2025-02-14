@@ -125,7 +125,7 @@ let mySketch = function(p) {
             
             //stop button
             p.fill(0, 0, 255);
-            p.rect(p.windowWidth / 2, p.windowHeight - p.windowHeight / 3, p.windowWidth / 1.7, p.windowWidth / 4.5);
+            p.rect(p.windowWidth / 2, p.windowHeight - p.windowHeight / 3.3, p.windowWidth / 1.7, p.windowWidth / 4.5);
 
             if (audioSpigot == 1){
               p.fill(0);
@@ -181,7 +181,7 @@ let mySketch = function(p) {
             return;
         }
 
-        if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 6 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 6 && p.mouseY > p.windowHeight - p.windowHeight / 3 - textHeight && p.mouseY < p.windowHeight - p.windowHeight / 3 + textHeight) {
+        if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 6 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 6 && p.mouseY > p.windowHeight - p.windowHeight / 3.3 - textHeight && p.mouseY < p.windowHeight - p.windowHeight / 3.3 + textHeight) {
             if (audioSpigot == 1){
               audioSpigot = 0;
             } else {
