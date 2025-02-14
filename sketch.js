@@ -1,4 +1,4 @@
-document.addEventListener('touchstart', {});
+// document.addEventListener('touchstart', {});
 
 // function handleTouchStart(event) {
 //     console.log('Touch started!', event);
@@ -40,9 +40,9 @@ let mySketch = function(p) {
         TWstartText = p.textWidth('start');
         TWmenuText = p.textWidth('+');
 
-        if (isIOSToggle){
-          p.touchStarted();
-        }
+        // if (isIOSToggle){
+        //   p.touchStarted();
+        // }
 
 
     }
