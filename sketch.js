@@ -8,7 +8,7 @@ let mySketch = function(p) {
     // const WHITE_KEYS = 7;
     // const BLACK_KEYS = 6; // Excluding the 3rd black key
 
-    let isIOStoggle;
+    
 
     let mx, my, rx = 0, ry = 0, rz = 0;
     let font, startText, menuText, TWstartText, TWmenuText, textHeight;
@@ -40,8 +40,8 @@ let mySketch = function(p) {
         TWstartText = p.textWidth('start');
         TWmenuText = p.textWidth('+');
 
-        if (isIOStoggle === 1){
-          p.touchStart();
+        if (isIOStoggle){
+          p.touchStarted();
         }
 
 

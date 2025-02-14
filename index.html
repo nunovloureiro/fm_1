@@ -69,13 +69,15 @@
             // 2. SENDING MESSAGES FROM JAVASCRIPT TO THE PATCH
             // 3. SENDING MESSAGES FROM THE PATCH TO JAVASCRIPT
 
+            let isIOSToggle = false;
+
             // Utility function to detect iOS
             function isIOS() {
                  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
                     (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
              }
 
-
+            
 
                         // Function to load p5js sketch with button
             function loadSketch() {
@@ -91,6 +93,8 @@
                 script.onerror = () => console.error("Error loading sketch.js");
                 document.body.appendChild(script);
             }
+            
+            isIOSToggle = isIOS();
 
             // ------------- 1. WEB PAGE INITIALIZATION
             const loadingDiv = document.querySelector('#loading')
