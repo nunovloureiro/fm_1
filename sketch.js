@@ -6,7 +6,7 @@ function handleTouchStart(event) {
 
 let mySketch = function(p) {
     const WHITE_KEYS = 7;
-    const BLACK_KEYS = 5; // Excluding the 3rd black key
+    const BLACK_KEYS = 6; // Excluding the 3rd black key
 
     let mx, my, rx = 0, ry = 0, rz = 0;
     let font, startText, menuText, TWstartText, TWmenuText, textHeight;
@@ -200,10 +200,10 @@ let mySketch = function(p) {
         for (let i = 0; i < WHITE_KEYS; i++) {
             teclasBrancas[i] = new p.kbKey(wkPos, wkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 0, i);
         }
-        for (let i = 0; i < BLACK_KEYS+1; i++) {
+        for (let i = 0; i < BLACK_KEYS; i++) {
           if (i != 2) {
             teclasPretas[i] = new p.kbKey(bkPos, bkeyVertOfset + i * keyVertDist, keySize, keyboardSW, 1, i);
-          }
+          } else {continue};
         }
     }
 
