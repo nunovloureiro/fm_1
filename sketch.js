@@ -125,14 +125,14 @@ let mySketch = function(p) {
             
             //stop button
             p.fill(0, 0, 255);
-            p.rect(p.windowWidth / 2, p.windowHeight / 3, p.windowWidth / 3, p.windowWidth / 5);
+            p.rect(p.windowWidth / 2, p.windowHeight - p.windowHeight / 3, p.windowWidth / 2.3, p.windowWidth / 2.3);
 
             if (audioSpigot == 1){
               p.text('pause', p.windowWidth / 2, p.windowHeight / 3 );
               sendMsgToWebPd("n_0_9", "0", [rx]);
             } else {
               rx = audioSpigot;
-              p.text('play', p.windowWidth / 2, p.windowHeight / 3 );
+              p.text('play', p.windowWidth / 2, p.windowHeight - p.windowHeight / 3 );
               sendMsgToWebPd("n_0_9", "0", [rx]);
             }
             sendMsgToWebPd("n_0_10", "0", [rz]);
@@ -179,7 +179,7 @@ let mySketch = function(p) {
             return;
         }
 
-        if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 6 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 6 && p.mouseY > p.windowHeight / 3 - textHeight && p.mouseY < p.windowHeight / 3 + textHeight) {
+        if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 6 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 6 && p.mouseY > p.windowHeight - p.windowHeight / 3 - textHeight && p.mouseY < p.windowHeight - p.windowHeight / 3 + textHeight) {
             if (audioSpigot == 1){
               audioSpigot = 0;
             } else {
