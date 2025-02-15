@@ -15,6 +15,8 @@ let mySketch = function(p) {
     let go = 1, menu = 0, keyMenu = 0, scaleMenu = 0, audioSpigot = 1;
     let wkPos, bkPos, keySize, wkeyVertOfset, bkeyVertOfset, keyVertDist, keyboardSW;
     let teclasBrancas = [], teclasPretas = [], teclado = [], keyID;
+    let scales = ['maj', 'maj pent', 'min', 'min pent'];
+    let escalas = [];
 
     p.preload = function() {
         font = p.loadFont('tiny5.ttf');
@@ -34,6 +36,7 @@ let mySketch = function(p) {
 
         p.scallingAndOrientation();
         p.initKeyboard();
+        p.initScales();
         hitKey = teclasBrancas[0];
         hitKey.selected = 0; // Highlight the selected key
 
@@ -138,9 +141,6 @@ let mySketch = function(p) {
               sendMsgToWebPd("n_0_9", "0", [rx]);
             }
             sendMsgToWebPd("n_0_10", "0", [rz]);
-
-
-
         }
 
         if (go == 1 && menu == 1 && keyMenu == 0) {
@@ -164,6 +164,26 @@ let mySketch = function(p) {
             p.textAlign(p.CENTER, p.CENTER);
             p.text('x', p.windowWidth / 2, p.windowHeight - p.windowHeight / 10);
         }
+
+        if (go == 1 && menu == 0 && scaleMenu == 1) {
+            p.background(0, 0, 255);
+            p.showScales();
+            // p.noStroke();
+            // p.fill(0);
+            // p.textSize(p.windowWidth / 5);
+            // p.textAlign(p.CENTER, p.CENTER);
+            // p.text('maj pent', p.windowWidth / 2, p.windowHeight / 2 - p.windowHeight / 8 - textHeight);
+            // p.text('maj', p.windowWidth / 2, p.windowHeight / 2 - p.windowHeight / 8 - textHeight);
+            // p.text('maj pent', p.windowWidth / 2, p.windowHeight / 2 - p.windowHeight / 8 - textHeight);
+            // p.text('maj pent', p.windowWidth / 2, p.windowHeight / 2 - p.windowHeight / 8 - textHeight);
+            p.noStroke();
+            p.fill(0);
+            p.textSize(p.windowWidth / 5);
+            p.textAlign(p.CENTER, p.CENTER);
+            p.text('x', p.windowWidth / 2, p.windowHeight - p.windowHeight / 10);
+
+        }
+
     }
 
     p.touchStarted = function() {
@@ -176,32 +196,37 @@ let mySketch = function(p) {
     }
 
     p.mousePressed = function() {
-        if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 10 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 10 && p.mouseY > p.windowHeight / 2 - textHeight && p.mouseY < p.windowHeight / 2 + textHeight) {
+        //go to menu
+        if (go == 1 && menu == 0 && keyMenu == 0 && scaleMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 10 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 10 && p.mouseY > p.windowHeight / 2 - textHeight && p.mouseY < p.windowHeight / 2 + textHeight) {
             menu = 1;
             return;
         }
 
-        if (go == 1 && menu == 0 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 6 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 6 && p.mouseY > p.windowHeight - p.windowHeight / 3.05 - textHeight && p.mouseY < p.windowHeight - p.windowHeight / 3.05 + textHeight) {
+        //pause button
+        if (go == 1 && menu == 0 && keyMenu == 0 && scaleMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 6 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 6 && p.mouseY > p.windowHeight - p.windowHeight / 3.05 - textHeight && p.mouseY < p.windowHeight - p.windowHeight / 3.05 + textHeight) {
             if (audioSpigot == 1){
               audioSpigot = 0;
             } else {
               audioSpigot = 1;
             }
         }
-
-        if (go == 1 && menu == 1 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 10 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 10 && p.mouseY > p.windowHeight / 2 - p.windowHeight / 8 - textHeight && p.mouseY < p.windowHeight / 2 - p.windowHeight / 8 + textHeight) {
+        //go to key
+        if (go == 1 && menu == 1 && keyMenu == 0 && scaleMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 10 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 10 && p.mouseY > p.windowHeight / 2 - p.windowHeight / 8 - textHeight && p.mouseY < p.windowHeight / 2 - p.windowHeight / 8 + 2 * textHeight) {
             menu = 0;
             keyMenu = 1;
             return;
         }
-
-        if (go == 1 && menu == 1 && keyMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 8 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 8 && p.mouseY > p.windowHeight / 2 + p.windowHeight / 8 + textHeight / 2 && p.mouseY < p.windowHeight / 2 + p.windowHeight / 8 + 2 * textHeight) {
+        //exit from menu button
+        if (go == 1 && menu == 1 && keyMenu == 0 && scaleMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 8 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 8 && p.mouseY > p.windowHeight / 2 + p.windowHeight / 8 - textHeight / 2 && p.mouseY < p.windowHeight / 2 + p.windowHeight / 8 + 2 * textHeight) {
             menu = 0;
             go = 1;
             keyMenu = 0;
+            return;
         }
 
-        if (keyMenu == 1 && menu == 0) {
+
+        //select key button
+        if (keyMenu == 1 && menu == 0 && scaleMenu == 0) {
             let newHitKey = null;
             for (let i = 0; i < teclasBrancas.length; i++) {
                 if (teclasBrancas[i].isClicked()) {
@@ -239,11 +264,41 @@ let mySketch = function(p) {
                 sendMsgToWebPd("n_0_35", "0", [key2pd]);
             }
 
+
+            //exit button keymenu
             if (p.mouseX > p.windowWidth / 2 - p.windowWidth / 10 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 10 && p.mouseY > p.windowHeight - 2 * p.windowHeight / 10 && p.mouseY < p.windowHeight + 2 * p.windowHeight / 10) {
                 keyMenu = 0;
                 menu = 0;
                 go = 1;
             }
+        }
+
+        //enter scaleMenu
+        if (go == 1 && menu == 1 && keyMenu == 0 && scaleMenu == 0 && p.mouseX > p.windowWidth / 2 - p.windowWidth / 7 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 7 && p.mouseY > p.windowHeight / 2 - textHeight / 2 && p.mouseY < p.windowHeight / 2 + textHeight / 2) {
+          menu = 0;
+          go = 1;
+          keyMenu = 0;
+          scaleMenu = 1;
+          return;
+        }
+
+        if (scaleMenu == 1 && menu == 0 && keyMenu == 0) {
+          for (let i = 0; i < escalas.length; i++) {
+            if (escalas[i].isClicked()) {
+              // Deselect all buttons first:
+              escalas.forEach(button => button.selected = 0);
+              // Select the clicked one:
+              escalas[i].selected = 1;
+              sendMsgToWebPd("n_0_37","0",[escalas[i].scaleNumber]);
+              break;
+            }
+          }
+          if (p.mouseX > p.windowWidth / 2 - p.windowWidth / 10 && p.mouseX < p.windowWidth / 2 + p.windowWidth / 10 && p.mouseY > p.windowHeight - 2 * p.windowHeight / 10 && p.mouseY < p.windowHeight + 2 * p.windowHeight / 10) {
+              keyMenu = 0;
+              scaleMenu = 0;
+              menu = 0;
+              go = 1;
+          }
         }
     }
 
@@ -273,6 +328,60 @@ let mySketch = function(p) {
             }
          }
     }
+
+    p.initScales = function() {
+      for (let i = 0; i < 4; i++) {
+          escalas[i] = new p.scaleButton(p.windowWidth / 2, 2 * textHeight + i * (textHeight+p.windowHeight / 18), i, scales);
+      }
+    }
+
+    p.showScales = function(){
+      p.background(0, 0, 255);
+      for (let i = 0; i < escalas.length; i++) {
+        escalas[i].show();
+      }
+    }
+
+
+    p.scaleButton = class {
+      constructor(x, y, scaleNumber, scales){
+        this.x = x;
+        this.y = y;
+        this.scaleNumber = scaleNumber;
+        this.scale = scales;
+        this.scaleName = this.scale[scaleNumber];
+
+        this.scaleNameWidth = p.textWidth(this.scaleName);
+        this.scaleNameHeight = p.textAscent();
+            
+        // Set the "maj pent" scale (index 1) as selected by default.
+        this.selected = (scaleNumber === 1) ? 1 : 0;
+      }
+
+      show() {
+        if (this.selected == 1){
+          p.rectMode(p.CENTER);
+          p.fill(0);
+          p.rect(this.x, this.y + p.windowHeight / 60, this.scaleNameWidth + this.scaleNameWidth / 5, this.scaleNameHeight + this.scaleNameHeight / 5);
+          p.noStroke();
+          p.fill(0,0,255);
+        } else {
+          p.noStroke();
+          p.fill(0);
+        }
+        p.text(this.scaleName, this.x, this.y);
+
+      }
+
+      isClicked() {
+        return (
+            p.mouseX > this.x - this.scaleNameWidth / 2 &&
+            p.mouseX < this.x + this.scaleNameWidth / 2 &&
+            p.mouseY > this.y - this.scaleNameHeight / 2 &&
+            p.mouseY < this.y + this.scaleNameHeight / 2
+        );
+    }
+  }
 
     p.kbKey = class {
         constructor(x, y, keySize, keyboardSW, w_b, keyID) {
